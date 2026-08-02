@@ -27,6 +27,14 @@ Statique, sans build, sans dépendance externe : **HTML + CSS + un fichier GSAP 
 | Parcours | de Paint à 7 ans au Hub d'Innovation |
 | Contact | ce que je peux faire, comment me joindre |
 
+## Mobile : application installable
+
+Sous 820 px de large, le site bascule en interface d'application : **en-tête fixe**, **barre d'onglets basse** (Accueil · Projets · Création · Parcours · Contact) et **un seul groupe de cartes affiché à la fois**, pour supprimer le défilement interminable.
+
+C'est une **PWA installable** : `manifest.webmanifest` (mode `standalone`, icônes 192/512 + maskable) et `sw.js` (stratégie *cache d'abord, mise à jour en arrière-plan*, donc le site fonctionne hors-ligne une fois visité). Un bouton **↓ Installer** apparaît dans l'en-tête quand le navigateur le propose.
+
+Après une modification, **incrémenter `CACHE` dans `sw.js`** (`edwin-portfolio-v1` → `v2`) pour forcer le rafraîchissement chez les visiteurs déjà venus.
+
 ## Utilisation
 
 Ouvrir `index.html`. Aucun serveur nécessaire.
