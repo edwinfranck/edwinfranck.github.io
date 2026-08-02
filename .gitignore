@@ -2,3 +2,6 @@
 .index.backup.html
 _*.html
 .DS_Store
+
+# demo d ouverture: reste locale tant qu elle n est pas validee
+splash-demo.html
