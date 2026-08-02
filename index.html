@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edwin Kouassi · Designer, développeur, pédagogue</title>
+<meta name="description" content="Je dessine, je code, je livre, et je forme ceux qui prendront la suite. Produits web et mobile, plateformes en production, pédagogie. Abidjan.">
+<meta name="author" content="Edwin Franck B. Kouassi">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Edwin Kouassi · Designer, développeur, pédagogue">
+<meta property="og:description" content="Je dessine, je code, je livre, et je forme ceux qui prendront la suite. Abidjan.">
+<meta property="og:image" content="assets/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ff5f3a'/></svg>">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#05060a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Edwin Kouassi">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<style>
+/* ───────────────────────── BASE ───────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box;border-radius:0!important;border:0}
+
+/* ─── THÈME SOMBRE (défaut) ─── */
+:root{
+  --bg:#05060a; --tile:#0c0e14; --tile-hi:#12161f; --page:#0a0c11; --card:#0f1218; --fig:#080a0e;
+  --ink:#fff;
+  --i85:hsla(0,0%,100%,.90); --i62:hsla(0,0%,100%,.62); --i38:hsla(0,0%,100%,.40);
+  --i16:hsla(0,0%,100%,.16); --i08:hsla(0,0%,100%,.07);
+  --veil:hsla(225,45%,4%,.82);
+  --fade0:hsla(225,33%,3%,0); --fade1:hsla(225,33%,3%,.5);
+  --deco-op:.05; --grain-op:.035;
+  --c-blue:#3a63ff;    --c-blue-ink:#fff;      --t-blue:#3a63ff;
+  --c-green:#00ff97;   --c-green-ink:#05060a;  --t-green:#00ff97;
+  --c-orange:#ff5f3a;  --c-orange-ink:#05060a; --t-orange:#ff5f3a;
+  --c-magenta:#ff1ef7; --c-magenta-ink:#05060a;--t-magenta:#ff1ef7;
+  --gap:10px;
+}
+/* ─── THÈME CLAIR ─── */
+body.light{
+  --bg:#e9e9e6; --tile:#fff; --tile-hi:#f7f7f5; --page:#fff; --card:#f2f2ef; --fig:#ececea;
+  --ink:#08090d;
+  --i85:hsla(228,24%,6%,.88); --i62:hsla(228,24%,6%,.68); --i38:hsla(228,24%,6%,.48);
+  --i16:hsla(228,24%,6%,.18); --i08:hsla(228,24%,6%,.08);
+  --veil:hsla(225,20%,8%,.46);
+  --fade0:hsla(0,0%,100%,0); --fade1:hsla(0,0%,100%,.55);
+  --deco-op:.10; --grain-op:0;
+  --c-blue:#013afb;    --c-blue-ink:#fff;      --t-blue:#013afb;
+  --c-green:#00e08a;   --c-green-ink:#05060a;  --t-green:#008054;
+  --c-orange:#ff5f3a;  --c-orange-ink:#fff;    --t-orange:#d3400f;
+  --c-magenta:#ff1ef7; --c-magenta-ink:#fff;   --t-magenta:#bd00b6;
+}
+.a-blue   {--ac:var(--c-blue);   --ac-t:var(--t-blue);   --ac-ink:var(--c-blue-ink)}
+.a-green  {--ac:var(--c-green);  --ac-t:var(--t-green);  --ac-ink:var(--c-green-ink)}
+.a-orange {--ac:var(--c-orange); --ac-t:var(--t-orange); --ac-ink:var(--c-orange-ink)}
+.a-magenta{--ac:var(--c-magenta);--ac-t:var(--t-magenta);--ac-ink:var(--c-magenta-ink)}
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.anton{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.005em;line-height:.94}
+.mono{font-family:'IBM Plex Mono',monospace}
+a{color:inherit}
+
+#deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#deco i{position:absolute;display:block;opacity:var(--deco-op)}
+#deco i.d0{background:var(--c-blue)}#deco i.d1{background:var(--c-green)}#deco i.d2{background:var(--c-orange)}#deco i.d3{background:var(--c-magenta)}
+#grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:var(--grain-op);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>")}
+
+/* ───────────────────────── SHELL ───────────────────────── */
+#shell{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;padding:clamp(10px,1.4vh,18px) clamp(12px,1.4vw,22px)}
+header#top{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);flex:0 0 auto;padding-bottom:clamp(8px,1.2vh,14px)}
+#top .brand{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(13px,1.8vh,20px);letter-spacing:.02em}
+#top .brand b{color:var(--t-orange);font-weight:400}
+#top .role{font-family:'IBM Plex Mono',monospace;font-size:clamp(8.5px,1.1vh,11.5px);letter-spacing:.12em;text-transform:uppercase;color:var(--i38)}
+#top .sep{flex:1}
+#top button,#top a.btn{background:var(--i08);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:clamp(8.5px,1.1vh,11.5px);
+  letter-spacing:.08em;text-transform:uppercase;padding:7px 11px;cursor:pointer;text-decoration:none;transition:background .2s,color .2s;flex:0 0 auto}
+#top button:hover,#top a.btn:hover{background:var(--c-orange);color:var(--c-orange-ink)}
+#top .hint{font-family:'IBM Plex Mono',monospace;font-size:clamp(8.5px,1.05vh,11px);color:var(--i38);letter-spacing:.05em;text-transform:uppercase}
+
+#stage{flex:1 1 auto;min-height:0}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(7,1fr);gap:var(--gap);height:100%}
+
+/* ───────────────────────── TUILES ───────────────────────── */
+.t{position:relative;background:var(--tile);overflow:hidden;cursor:pointer;
+  padding:clamp(12px,1.5vh,20px) clamp(13px,1.2vw,22px);
+  display:flex;flex-direction:column;justify-content:flex-end;gap:6px;
+  transition:background .25s ease;will-change:transform}
+.t:hover{background:var(--tile-hi)}
+.t::after{content:'';position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--ac,var(--c-orange));transform:scaleX(0);transform-origin:0 50%;transition:transform .32s cubic-bezier(.2,.8,.2,1)}
+.t:hover::after{transform:scaleX(1)}
+.t .sq{position:absolute;top:0;right:0;width:clamp(24px,2.4vw,36px);height:clamp(24px,2.4vw,36px);background:var(--ac,var(--c-orange));opacity:.9}
+.t .k{font-family:'IBM Plex Mono',monospace;font-size:clamp(8.5px,1.05vh,11px);letter-spacing:.13em;text-transform:uppercase;color:var(--ac-t,var(--t-orange))}
+.t .h{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(15px,2.5vh,30px);line-height:.94}
+.t .h u{text-decoration:none;color:var(--ac-t)}
+.t .s{font-size:clamp(10.5px,1.35vh,14px);color:var(--i62);line-height:1.35;max-width:54ch}
+.t .plus{position:absolute;bottom:clamp(10px,1.3vh,16px);right:clamp(12px,1.1vw,18px);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--i38);opacity:0;transition:opacity .25s}
+.t:hover .plus{opacity:1}
+.t .viz{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:flex-start;
+  padding:2px clamp(28px,3vw,44px) clamp(6px,1vh,14px) 0;overflow:hidden;pointer-events:none;opacity:.95}
+.t .viz svg{display:block;width:100%;height:100%;max-height:100%;overflow:visible}
+.tags{display:flex;flex-wrap:wrap;gap:4px;flex:0 0 auto;margin-top:2px}
+.tags b{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:clamp(8px,1vh,10.5px);letter-spacing:.05em;padding:3px 6px;background:var(--i08);color:var(--i62)}
+
+/* placement */
+#t-moi{grid-column:1/6;grid-row:1/4;padding:0}
+#t-faire{grid-column:6/10;grid-row:1/3}
+#t-contact{grid-column:10/13;grid-row:1/3}
+#t-zeno{grid-column:6/9;grid-row:3/5}
+#t-djai{grid-column:9/11;grid-row:3/5}
+#t-devkora{grid-column:11/13;grid-row:3/5}
+#t-design{grid-column:1/4;grid-row:4/6}
+#t-homies{grid-column:4/6;grid-row:4/6}
+#t-entourage{grid-column:6/10;grid-row:5/7}
+#t-solve{grid-column:10/13;grid-row:5/7}
+#t-epitech{grid-column:1/4;grid-row:6/8}
+#t-stack{grid-column:4/6;grid-row:6/7}
+#t-parcours{grid-column:4/6;grid-row:7/8}
+#t-lumio{grid-column:6/9;grid-row:7/8}
+#t-clients{grid-column:9/13;grid-row:7/8}
+
+/* héro */
+.hero{position:relative;height:100%;display:grid;grid-template-rows:1fr auto}
+.hero .ph{position:relative;overflow:hidden;min-height:0}
+.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.06);display:block}
+.hero .ph::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,var(--fade0) 34%,var(--fade1) 64%,var(--tile) 100%)}
+.hero .ph .flag{position:absolute;top:0;left:0;display:flex;height:clamp(5px,.7vh,8px);width:clamp(56px,7vw,96px)}
+.hero .ph .flag span{flex:1}
+.hero .id{position:relative;padding:0 clamp(13px,1.2vw,22px) clamp(12px,1.5vh,20px)}
+.hero .id .nm{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(26px,4.6vh,56px);line-height:.86}
+.hero .id .nm small{display:block;font-size:.3em;letter-spacing:.16em;color:var(--i38);margin-bottom:.25em}
+.hero .id .th{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(13px,2vh,25px);line-height:1.04;margin-top:.5em;color:var(--t-orange)}
+.hero .id .ro{font-size:clamp(10.5px,1.3vh,13.5px);color:var(--i62);margin-top:.5em;line-height:1.4}
+
+/* ───────────────────────── PAGE (POPUP) ───────────────────────── */
+#veil{position:fixed;inset:0;z-index:40;background:var(--veil);backdrop-filter:blur(6px);opacity:0;visibility:hidden}
+#veil.on{visibility:visible}
+.page{position:fixed;z-index:50;left:50%;top:50%;
+  width:min(1720px,95vw);height:93vh;
+  margin-left:max(-860px,-47.5vw);margin-top:-46.5vh;
+  background:var(--page);visibility:hidden;overflow:hidden;
+  display:grid;grid-template-rows:auto 1fr}
+.page.on{visibility:visible}
+.page > .ph{position:relative;padding:clamp(18px,3vh,38px) clamp(20px,3vw,54px) clamp(12px,1.8vh,22px);display:flex;align-items:flex-end;gap:clamp(16px,2vw,34px)}
+.page .pk{font-family:'IBM Plex Mono',monospace;font-size:clamp(9.5px,1.2vh,12.5px);letter-spacing:.16em;text-transform:uppercase;color:var(--ac-t);margin-bottom:.55em}
+.page h2{font-size:clamp(26px,6vh,74px)}
+.page h2 u{text-decoration:none;color:var(--ac-t)}
+.page .ph .sep{flex:1}
+.xbtn{flex:0 0 auto;background:var(--i08);color:var(--ink);width:clamp(38px,4.6vh,52px);height:clamp(38px,4.6vh,52px);font-size:clamp(16px,2.2vh,22px);cursor:pointer;font-family:'IBM Plex Mono',monospace;transition:background .2s,color .2s;align-self:flex-start}
+.xbtn:hover{background:var(--ac);color:var(--ac-ink)}
+.page > .bd{overflow-y:auto;overflow-x:hidden;padding:0 clamp(20px,3vw,54px) clamp(52px,7vh,84px);scrollbar-width:thin;scrollbar-color:var(--i16) transparent}
+.page > .bd::-webkit-scrollbar{width:8px}
+.page > .bd::-webkit-scrollbar-thumb{background:var(--i16)}
+
+.lead{font-size:clamp(15px,2.2vh,25px);line-height:1.42;font-weight:300;color:var(--i85);max-width:46ch}
+.lead em{font-style:normal;color:var(--ac-t)}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,3vw,48px);align-items:start;margin-bottom:clamp(16px,2.4vh,32px)}
+.split.wide{grid-template-columns:1.35fr .65fr}
+.shot{background:var(--fig);padding:clamp(10px,1.6vh,20px);display:flex;align-items:center;justify-content:center}
+.shot img{max-width:100%;max-height:clamp(200px,40vh,460px);width:auto;display:block}
+.shot.tall img{max-height:clamp(240px,52vh,620px)}
+.gal{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--gap)}
+.gal figure{background:var(--card);overflow:hidden;position:relative}
+.gal img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.gal figure:hover img{transform:scale(1.05)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:8px 10px;background:linear-gradient(180deg,transparent,rgba(8,9,13,.88));
+  font-family:'IBM Plex Mono',monospace;font-size:clamp(8px,1.05vh,11px);letter-spacing:.05em;text-transform:uppercase;color:#fff;line-height:1.3}
+@media (max-width:1180px){.gal{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.gal{grid-template-columns:repeat(2,1fr)}}
+
+.blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--gap)}
+.blocks.c4{grid-template-columns:repeat(4,1fr)}
+.blk{background:var(--card);padding:clamp(13px,1.9vh,22px)}
+.blk .ico{display:block;width:clamp(20px,2.4vh,28px);height:clamp(20px,2.4vh,28px);color:var(--ac-t);margin-bottom:.6em}
+.blk .ico svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.blk h4{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(12.5px,1.75vh,18px);margin-bottom:.5em;line-height:1.05}
+.blk h4 u{text-decoration:none;color:var(--ac-t);margin-right:.4em}
+.blk p{font-size:clamp(11.5px,1.45vh,15px);line-height:1.5;color:var(--i62)}
+.blk p + p{margin-top:.6em}
+.blk strong{color:var(--ink);font-weight:600}
+.blk code{font-family:'IBM Plex Mono',monospace;font-size:.9em;background:var(--i08);padding:1px 5px;color:var(--ac-t)}
+.blk ul{list-style:none;margin-top:.4em}
+.blk li{font-size:clamp(11.5px,1.45vh,15px);line-height:1.6;color:var(--i62);padding-left:1em;position:relative}
+.blk li::before{content:'·';position:absolute;left:0;color:var(--ac-t)}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--gap);margin-bottom:clamp(14px,2vh,26px)}
+.kpi{background:var(--card);padding:clamp(12px,1.8vh,22px)}
+.kpi b{display:block;font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(24px,4.2vh,52px);line-height:.86;color:var(--ac-t)}
+.kpi span{display:block;font-family:'IBM Plex Mono',monospace;font-size:clamp(9px,1.15vh,12px);letter-spacing:.08em;text-transform:uppercase;color:var(--i38);margin-top:.6em;line-height:1.35}
+
+.stackrow{display:grid;grid-template-columns:clamp(90px,10vw,150px) 1fr;gap:clamp(12px,1.6vw,26px);padding:clamp(9px,1.3vh,15px) 0;align-items:baseline;
+  background:linear-gradient(90deg,var(--i08) 0 100%);background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%}
+.stackrow .lb{font-family:'IBM Plex Mono',monospace;font-size:clamp(9.5px,1.2vh,12.5px);letter-spacing:.1em;text-transform:uppercase;color:var(--ac-t)}
+.stackrow .vv{font-size:clamp(11.5px,1.5vh,16px);line-height:1.55;color:var(--i62)}
+.stackrow .vv b{color:var(--ink);font-weight:600}
+
+.tl{display:flex;flex-direction:column}
+.tl .r{display:grid;grid-template-columns:clamp(88px,10vw,150px) 1fr;gap:clamp(12px,1.6vw,26px);padding:clamp(9px,1.3vh,16px) 0;align-items:baseline;
+  background:linear-gradient(90deg,var(--i08) 0 100%);background-size:100% 1px;background-repeat:no-repeat;background-position:0 100%}
+.tl .r .y{font-family:'IBM Plex Mono',monospace;font-size:clamp(10px,1.3vh,13.5px);color:var(--ac-t)}
+.tl .r .c b{display:block;font-size:clamp(12.5px,1.6vh,16.5px);font-weight:600;margin-bottom:.2em}
+.tl .r .c span{display:block;font-size:clamp(11px,1.4vh,14.5px);color:var(--i62);line-height:1.45}
+
+.punch{background:var(--ac);color:var(--ac-ink);padding:clamp(16px,2.4vh,30px) clamp(18px,2.4vw,36px);margin-top:clamp(14px,2vh,26px)}
+.punch p{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(14px,2.3vh,30px);line-height:1.06;max-width:48ch}
+.punch small{display:block;font-family:'IBM Plex Mono',monospace;font-size:clamp(9px,1.15vh,12px);letter-spacing:.1em;text-transform:uppercase;opacity:.62;margin-top:.7em}
+.sect{font-family:'IBM Plex Mono',monospace;font-size:clamp(9.5px,1.2vh,12.5px);letter-spacing:.16em;text-transform:uppercase;color:var(--i38);margin:clamp(16px,2.4vh,32px) 0 clamp(9px,1.3vh,14px)}
+.sect::after{content:'';display:inline-block;width:clamp(20px,4vw,80px);height:1px;background:var(--i16);vertical-align:middle;margin-left:12px}
+.cap{font-family:'IBM Plex Mono',monospace;font-size:clamp(9px,1.15vh,12px);color:var(--i38);margin-top:.9em;line-height:1.5}
+.lnk{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:clamp(10px,1.3vh,13px);
+  letter-spacing:.06em;text-transform:uppercase;background:var(--ac);color:var(--ac-ink);padding:9px 14px;text-decoration:none;margin:.4em .4em 0 0;transition:opacity .2s}
+.lnk:hover{opacity:.82}
+.lnk.gh{background:var(--i08);color:var(--ink)}
+
+#pgbar{position:fixed;z-index:55;display:flex;align-items:center;gap:10px;visibility:hidden;opacity:0;
+  top:calc(3.5vh + clamp(18px,3vh,38px));
+  right:calc((100vw - min(1720px,95vw))/2 + clamp(20px,3vw,54px) + clamp(38px,4.6vh,52px) + 12px);
+  height:clamp(38px,4.6vh,52px);background:var(--i08);padding:0 10px}
+#pgbar button{background:var(--i16);color:var(--ink);font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 12px;cursor:pointer;transition:background .2s}
+#pgbar button:hover{background:var(--ink);color:var(--bg)}
+#pgbar span{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--i38);text-transform:uppercase}
+
+/* ───────── responsive ───────── */
+@media (max-width:1180px), (max-height:600px){
+  body{overflow:auto}
+  #shell{height:auto;min-height:100%}
+  .bento{grid-template-columns:repeat(6,1fr);grid-template-rows:none;grid-auto-rows:minmax(150px,auto)}
+  .t{grid-column:auto/span 3!important;grid-row:auto!important}
+  #t-moi,#t-epitech,#t-clients,#t-faire,#t-entourage,#t-design{grid-column:auto/span 6!important}
+  #t-moi .hero{min-height:440px}
+  .t .viz{max-height:120px}
+  .split,.split.wide{grid-template-columns:1fr}
+  .blocks.c4{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .page{width:100vw;height:100vh;margin:0;left:0;top:0}
+  #pgbar{top:clamp(18px,3vh,38px);right:calc(clamp(20px,3vw,54px) + clamp(38px,4.6vh,52px) + 12px)}
+}
+#tabbar{display:none}
+#instbtn{display:none}
+
+@media (max-width:820px){
+  #top{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--bg);gap:8px;
+    padding:10px clamp(12px,4vw,18px);height:56px;flex-wrap:nowrap;box-shadow:0 1px 0 var(--i08)}
+  #top .brand{font-size:16px;white-space:nowrap}
+  #top .role{display:none}
+  #top a.btn{padding:6px 9px;font-size:10px}
+  #shell{padding:0;height:auto}
+  #stage{padding:64px clamp(10px,3vw,16px) 84px}
+  .bento{gap:8px}
+  #tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:var(--bg);box-shadow:0 -1px 0 var(--i08);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+  #tabbar button{position:relative;flex:1;background:none;color:var(--i38);display:flex;flex-direction:column;
+    align-items:center;gap:3px;padding:6px 2px;cursor:pointer;transition:color .2s}
+  #tabbar button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  #tabbar button span{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.04em;text-transform:uppercase}
+  #tabbar button.on{color:var(--c-orange)}
+  #tabbar button.on::before{content:'';position:absolute;top:0;width:26px;height:2px;background:var(--c-orange)}
+  .t{display:none}
+  .t.tab-on{display:flex}
+  #instbtn{display:inline-block;background:var(--c-green);color:var(--c-green-ink);
+    font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+    padding:6px 9px;cursor:pointer;flex:0 0 auto}
+  .page{padding-bottom:env(safe-area-inset-bottom,0px)}
+}
+@media (max-width:820px){
+  .bento{grid-template-columns:1fr;grid-auto-rows:auto;gap:8px}
+  .t,#t-moi,#t-faire,#t-contact,#t-zeno,#t-djai,#t-devkora,#t-lumio,#t-homies,#t-solve,#t-entourage,#t-design,#t-epitech,#t-clients,#t-stack,#t-parcours{grid-column:auto!important;grid-row:auto!important}
+  .t{min-height:168px;padding:16px 16px 18px}
+  #t-moi{padding:0;min-height:auto}
+  #t-moi .hero{min-height:auto}
+  #t-moi .hero .ph{min-height:340px}
+  .t .viz{max-height:88px;padding-right:44px}
+  .t .k{font-size:10px}.t .h{font-size:25px}.t .s{font-size:14px}.t .plus{display:none}
+  .hero .id{padding:0 16px 18px}
+  .hero .id .nm{font-size:42px}
+  #top .hint{display:none}
+  #top a.btn{display:none}
+  #tbtn{padding:6px 9px;font-size:10px}
+  .page > .ph{padding:20px 18px 12px}
+  .page h2{font-size:30px}
+  .page > .bd{padding:0 18px 76px}
+  .lead{font-size:17px;max-width:none}
+  .blk h4{font-size:16px}.blk p,.blk li{font-size:14px}
+  .kpi b{font-size:32px}.punch p{font-size:19px}
+  .tl .r,.stackrow{grid-template-columns:1fr;gap:2px}
+  #pgbar{top:20px;right:70px;height:40px}
+}
+</style>
+</head>
+<body>
+<script>/* thème avant le premier rendu */(function(){
+  var q=/[?&]theme=(light|dark)/.exec(location.search), sv=null;
+  try{ sv=localStorage.getItem('edwin-theme'); }catch(e){}
+  if ((q ? q[1] : (sv || 'dark')) === 'light') document.body.classList.add('light');
+})();</script>
+
+
+<svg id="icons" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V5l-8-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7l9-4 9 4v10l-9 4-9-4z"/><path d="M3 7l9 4 9-4M12 11v10"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+<symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20"/><path d="M10 18h4"/></symbol>
+<symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="13" height="12"/><path d="M15 11l7-4v10l-7-4z"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M14.5 9.5c0-1-1-1.5-2.5-1.5S9.5 8.5 9.5 9.7c0 2.6 5 1.6 5 4.3 0 1.2-1 1.9-2.5 1.9s-2.5-.6-2.5-1.6"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9S14.5 18.3 12 21c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-5.5 6.5-5.5s6.5 1.9 6.5 5.5"/><path d="M16.5 5.5a3.2 3.2 0 010 6M18 14.8c2.1.6 3.5 2.2 3.5 5.2"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 000 18c1.4 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h1.5A3.5 3.5 0 0021 11.5C21 6.8 16.9 3 12 3z"/><circle cx="7.5" cy="11" r="1.1"/><circle cx="11" cy="7.5" r="1.1"/><circle cx="15.5" cy="9" r="1.1"/></symbol>
+<symbol id="i-teach" viewBox="0 0 24 24"><path d="M2 7l10-4 10 4-10 4z"/><path d="M6 10v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M21 8v6"/></symbol>
+<symbol id="i-offline" viewBox="0 0 24 24"><path d="M6.5 18a4.5 4.5 0 01-.5-9 6 6 0 0111.2-1.6"/><path d="M20 12.5a4 4 0 01-2 7.5H9"/><path d="M3 3l18 18"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></symbol>
+<symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 15a3 3 0 01-3 3H8l-5 3V6a3 3 0 013-3h12a3 3 0 013 3z"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.5l3.5 2"/></symbol>
+</defs></svg>
+
+<div id="deco"></div>
+<div id="grain"></div>
+
+<div id="shell">
+  <header id="top">
+    <div class="brand">Edwin Kouassi <b>/</b></div>
+    <div class="role">Designer · Développeur · Pédagogue · Abidjan</div>
+    <div class="sep"></div>
+    <a class="btn" href="mailto:edwin1.kouassi@epitech.eu">M'écrire</a>
+    <button id="instbtn" type="button" title="Installer">&#8595; Installer</button>
+    <button id="tbtn" type="button" title="Clair / sombre (touche L)">◐ Mode clair</button>
+    <div class="hint">Cliquez sur une carte</div>
+  </header>
+
+  <div id="stage">
+    <div class="bento">
+
+      <!-- MOI -->
+      <article class="t a-orange" id="t-moi" data-page="moi" data-grp="accueil">
+        <div class="hero">
+          <div class="ph">
+            <img src="assets/img/edwin.jpg" alt="Edwin Franck B. Kouassi">
+            <div class="flag"><span style="background:#ff8200"></span><span style="background:#f4f4f4"></span><span style="background:#00a94f"></span></div>
+          </div>
+          <div class="id">
+            <div class="nm"><small>Edwin Franck B.</small>Kouassi</div>
+            <div class="th">Je dessine, je code, je livre, et je forme ceux qui prendront la suite.</div>
+            <div class="ro">Designer devenu développeur, aujourd'hui responsable pédagogique et builder de produits. Basé à Abidjan.</div>
+          </div>
+        </div>
+        <span class="plus mono">→ qui je suis</span>
+      </article>
+
+      <!-- CE QUE JE FAIS -->
+      <article class="t a-blue" id="t-faire" data-page="faire" data-grp="accueil">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 340 84" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <g font-family="IBM Plex Mono" font-size="8.5" letter-spacing=".5">
+              <rect x="0" y="10" width="52" height="30" fill="var(--c-blue)"/><text x="8" y="29" fill="var(--c-blue-ink)">DESIGN</text>
+              <rect x="60" y="10" width="90" height="30" fill="var(--c-blue)"/><text x="68" y="29" fill="var(--c-blue-ink)">DÉVELOPPEMENT</text>
+              <rect x="158" y="10" width="84" height="30" fill="var(--c-blue)"/><text x="166" y="29" fill="var(--c-blue-ink)">ARCHITECTURE</text>
+              <rect x="250" y="10" width="68" height="30" fill="var(--c-blue)"/><text x="258" y="29" fill="var(--c-blue-ink)">PÉDAGOGIE</text>
+              <text x="0" y="62" fill="var(--i38)">DU PIXEL AU DÉPLOIEMENT, PUIS À LA SALLE DE CLASSE</text>
+            </g>
+          </svg>
+        </div>
+        <div class="k">Ce que je fais</div>
+        <div class="h">Quatre métiers, <u>une seule chaîne</u></div>
+        <div class="s">Je conçois l'interface, j'écris le code, je déploie l'infrastructure, et j'enseigne les trois.</div>
+        <span class="plus mono">→ ouvrir</span>
+      </article>
+
+      <!-- CONTACT -->
+      <article class="t a-green" id="t-contact" data-page="contact" data-grp="contact">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 240 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <g font-family="IBM Plex Mono" font-size="8.5" fill="var(--i62)">
+              <rect x="0" y="10" width="12" height="12" fill="var(--c-green)"/><text x="22" y="20">EDWIN1.KOUASSI@EPITECH.EU</text>
+              <rect x="0" y="34" width="12" height="12" fill="var(--c-green)" opacity=".6"/><text x="22" y="44">GITHUB · BEHANCE · CV PDF</text>
+              <rect x="0" y="58" width="12" height="12" fill="var(--c-green)" opacity=".35"/><text x="22" y="68">ABIDJAN, CÔTE D'IVOIRE</text>
+            </g>
+          </svg>
+        </div>
+        <div class="k">Me joindre</div>
+        <div class="h">Écrivez-<u>moi</u></div>
+        <div class="s">Une question, une idée, une envie de discuter d'un projet ou de pédagogie. CV, Behance et GitHub à l'intérieur.</div>
+        <span class="plus mono">→ ouvrir</span>
+      </article>
+
+      <!-- ZENO -->
+      <article class="t a-orange" id="t-zeno" data-page="zeno" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 240 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="8" width="52" height="70" fill="var(--i08)"/>
+            <rect x="6" y="16" width="40" height="5" fill="var(--c-orange)"/>
+            <rect x="6" y="27" width="30" height="4" fill="var(--i16)"/><rect x="6" y="36" width="36" height="4" fill="var(--i16)"/>
+            <rect x="6" y="45" width="26" height="4" fill="var(--i16)"/><rect x="6" y="54" width="34" height="4" fill="var(--i16)"/>
+            <rect x="60" y="8" width="180" height="18" fill="var(--c-orange)" opacity=".85"/>
+            <rect x="60" y="32" width="86" height="46" fill="var(--i08)"/><rect x="154" y="32" width="86" height="46" fill="var(--i08)"/>
+            <rect x="68" y="60" width="10" height="12" fill="var(--c-orange)" opacity=".8"/><rect x="82" y="52" width="10" height="20" fill="var(--c-orange)" opacity=".6"/>
+            <rect x="96" y="44" width="10" height="28" fill="var(--c-orange)"/><rect x="110" y="56" width="10" height="16" fill="var(--c-orange)" opacity=".45"/>
+            <rect x="162" y="42" width="70" height="4" fill="var(--i16)"/><rect x="162" y="52" width="54" height="4" fill="var(--i16)"/><rect x="162" y="62" width="62" height="4" fill="var(--i16)"/>
+          </svg>
+        </div>
+        <div class="k">Plateforme métier · en production</div>
+        <div class="h">Zeno</div>
+        <div class="s">« Arrêtez de bricoler, gérez votre campus. » 12 outils remplacés par une seule plateforme, sur deux campus en production.</div>
+        <div class="tags"><b>530+ utilisateurs</b><b>2 campus</b><b>React 19</b><b>Node 22</b><b>Docker</b></div>
+        <span class="plus mono">→ étude de cas</span>
+      </article>
+
+      <!-- DJAI -->
+      <article class="t a-green" id="t-djai" data-page="djai" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 120 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="34" y="4" width="52" height="88" fill="var(--i08)"/>
+            <rect x="40" y="12" width="40" height="8" fill="var(--c-green)"/>
+            <rect x="40" y="26" width="26" height="4" fill="var(--i16)"/>
+            <rect x="40" y="46" width="7" height="20" fill="var(--c-green)" opacity=".8"/>
+            <rect x="50" y="54" width="7" height="12" fill="var(--c-green)" opacity=".5"/>
+            <rect x="60" y="38" width="7" height="28" fill="var(--c-green)"/>
+            <rect x="70" y="50" width="7" height="16" fill="var(--c-green)" opacity=".4"/>
+            <rect x="40" y="74" width="40" height="4" fill="var(--i16)"/>
+            <text x="0" y="92" font-family="IBM Plex Mono" font-size="7" fill="var(--i38)">SMS → BUDGET</text>
+          </svg>
+        </div>
+        <div class="k">Application mobile</div>
+        <div class="h">Djai</div>
+        <div class="s">Lit les SMS MTN, Moov et bancaires, et construit le budget tout seul. Rien ne quitte le téléphone.</div>
+        <div class="tags"><b>Play Store</b><b>React Native</b><b>Expo</b><b>Offline</b></div>
+        <span class="plus mono">→ étude de cas</span>
+      </article>
+
+      <!-- DEVKORA -->
+      <article class="t a-blue" id="t-devkora" data-page="devkora" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 120 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="8" width="120" height="72" fill="var(--i08)"/>
+            <rect x="0" y="8" width="120" height="10" fill="var(--c-blue)" opacity=".85"/>
+            <text x="6" y="32" font-family="IBM Plex Mono" font-size="7" fill="var(--c-blue)">&gt; run tests</text>
+            <rect x="6" y="38" width="60" height="3.5" fill="var(--i16)"/>
+            <rect x="6" y="46" width="44" height="3.5" fill="var(--i16)"/>
+            <rect x="6" y="54" width="52" height="3.5" fill="var(--i16)"/>
+            <rect x="6" y="64" width="9" height="9" fill="var(--c-green)"/><rect x="19" y="64" width="9" height="9" fill="var(--c-green)"/>
+            <rect x="32" y="64" width="9" height="9" fill="var(--i16)"/>
+          </svg>
+        </div>
+        <div class="k">SaaS multi-tenant</div>
+        <div class="h">Devkora</div>
+        <div class="s">Évaluation technique : vrai éditeur, exécution en sandbox, critères validés en direct.</div>
+        <div class="tags"><b>Next.js 15</b><b>Judge0</b><b>Prisma</b></div>
+        <span class="plus mono">→ étude de cas</span>
+      </article>
+
+      <!-- LUMIO -->
+      <article class="t a-green" id="t-lumio" data-page="lumio" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 300 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <g font-family="IBM Plex Mono" font-size="8">
+              <rect x="0" y="14" width="66" height="26" fill="var(--c-green)"/><text x="9" y="31" fill="var(--c-green-ink)">FIDÈLE</text>
+              <path d="M70 27h26" stroke="var(--i38)" stroke-width="1.2"/>
+              <rect x="100" y="14" width="86" height="26" fill="var(--i08)"/><text x="109" y="31" fill="var(--i62)">MOBILE MONEY</text>
+              <path d="M190 27h26" stroke="var(--i38)" stroke-width="1.2"/>
+              <rect x="220" y="14" width="80" height="26" fill="var(--c-green)"/><text x="229" y="31" fill="var(--c-green-ink)">PAROISSE</text>
+              <text x="0" y="62" fill="var(--i38)">DÎME · QUÊTE · DONS · SERVICES, EN QUELQUES SECONDES</text>
+              <text x="0" y="78" fill="var(--i38)">PWA : RIEN À INSTALLER, MÊME SUR UN TÉLÉPHONE D'ENTRÉE DE GAMME</text>
+            </g>
+          </svg>
+        </div>
+        <div class="k">SaaS PWA · en développement</div>
+        <div class="h">Lumio</div>
+        <div class="s">Digitaliser la vie paroissiale en Afrique francophone : dons et services par Mobile Money.</div>
+        <div class="tags"><b>PWA</b><b>Mobile Money</b><b>Afrique francophone</b></div>
+        <span class="plus mono">→ étude de cas</span>
+      </article>
+
+      <!-- HOMIES -->
+      <article class="t a-magenta" id="t-homies" data-page="homies" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 140 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="6" width="90" height="56" fill="var(--i08)"/>
+            <rect x="8" y="14" width="34" height="18" fill="var(--c-magenta)"/><rect x="48" y="14" width="34" height="18" fill="var(--i16)"/>
+            <rect x="8" y="38" width="34" height="18" fill="var(--i16)"/><rect x="48" y="38" width="34" height="18" fill="var(--i16)"/>
+            <rect x="100" y="18" width="24" height="40" fill="var(--i08)"/>
+            <rect x="104" y="24" width="16" height="24" fill="var(--c-magenta)" opacity=".6"/>
+            <text x="0" y="80" font-family="IBM Plex Mono" font-size="7" fill="var(--i38)">TÉLÉ + 8 TÉLÉPHONES, ZÉRO INSTALLATION</text>
+          </svg>
+        </div>
+        <div class="k">Multijoueur temps réel</div>
+        <div class="h">Homies</div>
+        <div class="s">Une partie sur la télé, chacun joue depuis son téléphone. 25 modes, 9 règles.</div>
+        <div class="tags"><b>Socket.IO</b><b>PWA</b><b>363 commits</b></div>
+        <span class="plus mono">→ étude de cas</span>
+      </article>
+
+      <!-- SOLVE -->
+      <article class="t a-blue" id="t-solve" data-page="solve" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 240 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="8" width="70" height="46" fill="var(--i08)"/><rect x="0" y="8" width="70" height="6" fill="var(--c-blue)"/>
+            <rect x="6" y="22" width="40" height="4" fill="var(--i16)"/><rect x="6" y="31" width="52" height="4" fill="var(--i16)"/><rect x="6" y="40" width="30" height="4" fill="var(--i16)"/>
+            <rect x="78" y="8" width="70" height="46" fill="var(--i08)"/><rect x="78" y="8" width="70" height="6" fill="var(--c-blue)" opacity=".6"/>
+            <rect x="84" y="22" width="46" height="4" fill="var(--i16)"/><rect x="84" y="31" width="34" height="4" fill="var(--i16)"/><rect x="84" y="40" width="50" height="4" fill="var(--i16)"/>
+            <rect x="156" y="8" width="70" height="46" fill="var(--i08)"/><rect x="156" y="8" width="70" height="6" fill="var(--c-blue)" opacity=".35"/>
+            <rect x="162" y="22" width="36" height="4" fill="var(--i16)"/><rect x="162" y="31" width="48" height="4" fill="var(--i16)"/>
+            <g font-family="IBM Plex Mono" font-size="7.5" fill="var(--i38)">
+              <text x="0" y="72">PROJETS</text><text x="78" y="72">CHALLENGES</text><text x="156" y="72">IDÉES</text>
+              <text x="0" y="88" fill="var(--t-green)">✓ 54 TESTS, SANS BASE DE DONNÉES LIVE</text>
+            </g>
+          </svg>
+        </div>
+        <div class="k">Plateforme communautaire</div>
+        <div class="h">Solve</div>
+        <div class="s">Les développeurs y publient leurs projets, participent à des challenges et co-construisent des idées.</div>
+        <div class="tags"><b>Next.js 16</b><b>Supabase</b><b>Express 5</b><b>54 tests</b></div>
+        <span class="plus mono">→ étude de cas</span>
+      </article>
+
+      <!-- DESIGN -->
+      <article class="t a-magenta" id="t-design" data-page="design" data-grp="creation">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 240 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="6" width="52" height="52" fill="var(--c-magenta)" opacity=".85"/>
+            <rect x="58" y="6" width="52" height="52" fill="var(--i08)"/>
+            <rect x="116" y="6" width="52" height="52" fill="var(--c-magenta)" opacity=".45"/>
+            <rect x="174" y="6" width="52" height="52" fill="var(--i08)"/>
+            <rect x="64" y="14" width="30" height="4" fill="var(--i16)"/><rect x="64" y="22" width="38" height="4" fill="var(--i16)"/>
+            <circle cx="200" cy="32" r="14" fill="var(--c-magenta)" opacity=".3"/>
+            <text x="0" y="80" font-family="IBM Plex Mono" font-size="7.5" fill="var(--i38)">AFFICHES · IDENTITÉS · PACKAGING · UI</text>
+          </svg>
+        </div>
+        <div class="k">Avant le code, et toujours</div>
+        <div class="h">Le <u>design</u></div>
+        <div class="s">Dix ans d'infographie et de direction artistique. Affiches, identités, packaging, campagnes.</div>
+        <div class="tags"><b>15 visuels</b><b>Behance</b><b>Suite Adobe</b></div>
+        <span class="plus mono">→ voir les créations</span>
+      </article>
+
+      <!-- ENTOURAGE -->
+      <article class="t a-magenta" id="t-entourage" data-page="entourage" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 240 92" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <g font-family="IBM Plex Mono" font-size="8">
+              <rect x="0" y="12" width="52" height="26" fill="var(--c-magenta)"/><text x="7" y="29" fill="var(--c-magenta-ink)">VOUS</text>
+              <path d="M56 25h24" stroke="var(--i38)" stroke-width="1.2"/>
+              <rect x="84" y="12" width="72" height="26" fill="var(--i08)"/><text x="91" y="29" fill="var(--i62)">APPEL VIDÉO</text>
+              <path d="M160 25h24" stroke="var(--i38)" stroke-width="1.2"/>
+              <rect x="188" y="12" width="52" height="26" fill="var(--c-magenta)"/><text x="195" y="29" fill="var(--c-magenta-ink)">EXPERT</text>
+              <text x="0" y="58" fill="var(--i38)">+100 EXPERTS · 30 SECTEURS · 35 PAYS COUVERTS</text>
+              <text x="0" y="76" fill="var(--i38)">FR / EN · ABONNEMENT · PAIEMENT EN LIGNE</text>
+            </g>
+          </svg>
+        </div>
+        <div class="k">Client · plateforme en production</div>
+        <div class="h">Entourage <u>Africa</u></div>
+        <div class="s">Se connecter aux meilleurs experts d'Afrique en appel vidéo privé. +100 experts, 30 secteurs, 35 pays.</div>
+        <div class="tags"><b>entourage.africa</b><b>WordPress</b><b>WooCommerce</b><b>FR / EN</b></div>
+        <span class="plus mono">→ étude de cas</span>
+      </article>
+
+      <!-- EPITECH -->
+      <article class="t a-blue" id="t-epitech" data-page="epitech" data-grp="parcours">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 300 90" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="56" width="46" height="20" fill="var(--c-blue)" opacity=".3"/>
+            <rect x="54" y="42" width="46" height="34" fill="var(--c-blue)" opacity=".5"/>
+            <rect x="108" y="26" width="46" height="50" fill="var(--c-blue)" opacity=".72"/>
+            <rect x="162" y="8" width="46" height="68" fill="var(--c-blue)"/>
+            <g font-family="IBM Plex Mono" font-size="7" fill="var(--i38)">
+              <text x="0" y="88">ÉTUDIANT</text><text x="54" y="88">APE</text><text x="108" y="88">RESP. PROMO</text><text x="162" y="88" fill="var(--t-blue)">RESP. BACHELOR</text>
+              <text x="222" y="30">+ LES OUTILS QUE</text><text x="222" y="42">LA PÉDAGOGIE</text><text x="222" y="54">UTILISE</text>
+            </g>
+          </svg>
+        </div>
+        <div class="k">Epitech · 2019 → aujourd'hui</div>
+        <div class="h">Étudiant, puis <u>responsable</u></div>
+        <div class="s">Responsable du Bachelor, bientôt du Hub d'Innovation. Et je construis les outils de mon propre métier : Suivis, epitech-tracker, Bulletins Insight, FORGE.</div>
+        <span class="plus mono">→ ouvrir</span>
+      </article>
+
+      <!-- CLIENTS -->
+      <article class="t a-orange" id="t-clients" data-page="clients" data-grp="creation">
+        <span class="sq"></span>
+        <div class="k">Ils m'ont fait confiance</div>
+        <div class="h">Clients &amp; <u>institutions</u></div>
+        <div class="s">Entourage Africa · UNICEF Bénin · Echopen (Paris) · ADCVI · Afrolead · MTN Bénin · Lune Groupe · ministères.</div>
+        <span class="plus mono">→ ouvrir</span>
+      </article>
+
+      <!-- STACK -->
+      <article class="t a-magenta" id="t-stack" data-page="stack" data-grp="parcours">
+        <span class="sq"></span>
+        <div class="k">Outils</div>
+        <div class="h">La <u>stack</u></div>
+        <div class="s">React · Next · Node · React Native · Docker · MongoDB · Figma · la suite Adobe.</div>
+        <span class="plus mono">→ ouvrir</span>
+      </article>
+
+      <!-- PARCOURS -->
+      <article class="t a-orange" id="t-parcours" data-page="parcours" data-grp="parcours">
+        <span class="sq"></span>
+        <div class="k">D'où je viens</div>
+        <div class="h">Le <u>parcours</u></div>
+        <div class="s">Paint à 7 ans, Epitech à 27, responsable à 30.</div>
+        <span class="plus mono">→ ouvrir</span>
+      </article>
+
+    </div>
+  </div>
+</div>
+
+<nav id="tabbar" aria-label="Sections">
+  <button data-tab="accueil" class="on" type="button"><svg><use href="#i-target"/></svg><span>Accueil</span></button>
+  <button data-tab="projets" type="button"><svg><use href="#i-box"/></svg><span>Projets</span></button>
+  <button data-tab="creation" type="button"><svg><use href="#i-palette"/></svg><span>Cr&eacute;ation</span></button>
+  <button data-tab="parcours" type="button"><svg><use href="#i-teach"/></svg><span>Parcours</span></button>
+  <button data-tab="contact" type="button"><svg><use href="#i-msg"/></svg><span>Contact</span></button>
+</nav>
+
+<div id="veil"></div>
+<div id="pgbar"><button data-nav="-1">← précédent</button><span id="pgnum">1 / 15</span><button data-nav="1">suivant →</button></div>
+
+<!-- ═══════════════════════ PAGES ═══════════════════════ -->
+
+<!-- MOI -->
+<section class="page a-orange" id="p-moi">
+  <div class="ph">
+    <div><div class="pk rv">Qui je suis</div><h2 class="rv">Edwin Franck B. <u>Kouassi</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>✕</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">J'ai commencé par <em>dessiner</em> : le drapeau de la Côte d'Ivoire sur Paint, à 7 ans, sur les Pentium qui traînaient à la maison. Le dessin est devenu de l'infographie, l'infographie du web design, le web design du développement, et le développement de la pédagogie.</p>
+        <p class="lead rv" style="margin-top:1em">Aujourd'hui je conçois et je livre des produits, et je forme les ingénieurs qui prendront la suite. <em>Les deux métiers se nourrissent</em> : je construis les outils que ma pédagogie utilise, et j'enseigne ce que mes projets m'apprennent.</p>
+        <p class="cap rv">&lt; Abidjan, Côte d'Ivoire · français, anglais B1 /&gt;</p>
+        <div class="rv" style="margin-top:1.2em">
+          <a class="lnk" href="mailto:edwin1.kouassi@epitech.eu">edwin1.kouassi@epitech.eu</a>
+          <a class="lnk gh" href="mailto:franckedwin1@gmail.com">franckedwin1@gmail.com</a>
+          <a class="lnk gh" href="https://github.com/edwinfranck" target="_blank" rel="noopener">github.com/edwinfranck</a>
+          <a class="lnk gh" href="https://www.behance.net/porpix24a0f2" target="_blank" rel="noopener">Behance</a>
+          <a class="lnk gh" href="assets/pdf/CV-Edwin-Kouassi.pdf" target="_blank" rel="noopener">Mon CV (PDF)</a>
+        </div>
+      </div>
+      <div class="shot tall rv"><img src="assets/img/edwin.jpg" alt="Edwin Kouassi"></div>
+    </div>
+
+    <div class="sect rv">En clair</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-code"/></svg></span><h4>Ce que je sais faire</h4><p>Concevoir une interface, écrire le code qui va derrière, choisir l'architecture, déployer, et transmettre. <strong>Rare : je couvre toute la chaîne</strong>, du premier croquis Figma jusqu'au conteneur en production.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-clock"/></svg></span><h4>D'où ça vient</h4><p>Bac scientifique, BTS informatique développeur d'application, cinq ans d'infographie et de web design payés, puis le Bachelor Epitech, commencé à 27 ans, dans la toute première promotion du Bénin.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-target"/></svg></span><h4>Où j'en suis</h4><p>Responsable du Bachelor Epitech Bénin, en route pour le <strong>Hub d'Innovation d'Abidjan</strong>. Master cybersécurité &amp; cloud en cours, <strong>financé par mon entreprise</strong>.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-msg"/></svg></span><h4>Ce qui m'intéresse</h4><p>Concevoir et livrer des produits de bout en bout, faire monter des équipes en compétence, et résoudre avec du logiciel des problèmes africains concrets.</p><p>En parallèle d'Epitech, je suis <strong>chef de projet digital chez Afrolead</strong> depuis 2017, une agence de communication créative en Côte d'Ivoire.</p></div>
+    </div>
+
+    <div class="punch rv"><p>Je ne suis pas un designer qui code un peu, ni un développeur qui fait ses maquettes. Je fais les deux depuis dix ans.</p></div>
+  </div>
+</section>
+
+<!-- CE QUE JE FAIS -->
+<section class="page a-blue" id="p-faire">
+  <div class="ph">
+    <div><div class="pk rv">Ce que je fais</div><h2 class="rv">Quatre métiers, <u>une seule chaîne</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split wide">
+      <div>
+        <p class="lead rv">La plupart des projets meurent aux <em>frontières</em> : entre le designer et le développeur, entre le développeur et l'infra, entre l'équipe et ceux qui doivent apprendre à s'en servir.</p>
+        <p class="lead rv" style="margin-top:1em">Je travaille sur les <em>quatre segments</em>, donc il n'y a pas de frontière.</p>
+      </div>
+      <div class="shot rv" style="padding:clamp(14px,2.4vh,30px)">
+        <svg viewBox="0 0 420 200" style="width:100%;height:auto" aria-hidden="true">
+          <g font-family="IBM Plex Mono" font-size="9">
+            <text x="0" y="14" fill="var(--i38)" letter-spacing="1.4">LE PARCOURS HABITUEL</text>
+            <rect x="0" y="26" width="82" height="26" fill="var(--i08)"/><text x="12" y="43" fill="var(--i62)">DESIGN</text>
+            <rect x="112" y="26" width="82" height="26" fill="var(--i08)"/><text x="122" y="43" fill="var(--i62)">DÉV.</text>
+            <rect x="224" y="26" width="82" height="26" fill="var(--i08)"/><text x="234" y="43" fill="var(--i62)">INFRA</text>
+            <rect x="336" y="26" width="84" height="26" fill="var(--i08)"/><text x="346" y="43" fill="var(--i62)">ÉQUIPE</text>
+            <g stroke="var(--c-orange)" stroke-width="1.6"><path d="M92 32l10 14M102 32l-10 14"/><path d="M204 32l10 14M214 32l-10 14"/><path d="M316 32l10 14M326 32l-10 14"/></g>
+            <text x="0" y="76" fill="var(--c-orange)" font-size="8">TROIS FRONTIÈRES, TROIS ENDROITS OÙ ÇA CASSE</text>
+            <text x="0" y="122" fill="var(--i38)" letter-spacing="1.4">AVEC MOI</text>
+            <rect x="0" y="134" width="420" height="30" fill="var(--ac)"/>
+            <g fill="var(--ac-ink)" text-anchor="middle"><text x="52" y="153">DESIGN</text><text x="157" y="153">DÉV.</text><text x="262" y="153">INFRA</text><text x="367" y="153">ÉQUIPE</text></g>
+            <text x="0" y="186" fill="var(--ac-t)" font-size="8">UNE SEULE CHAÎNE, UN SEUL INTERLOCUTEUR</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="blocks c4">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4><u>1</u> Design</h4><p>Dix ans avant le code : identité, affiche, maquette, motion. <strong>Photoshop, Illustrator, InDesign, After Effects, Premiere Pro, XD, Figma.</strong></p><p>Concrètement : je dessine les interfaces que je développe, et je sais défendre une direction artistique devant un client. <strong>Les créations sont dans la carte «&nbsp;Le design&nbsp;».</strong></p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-code"/></svg></span><h4><u>2</u> Développement</h4><p>Sur mesure (<strong>React 19, Next.js 15, TypeScript, Astro</strong>), mobile (<strong>React Native, Expo</strong>), temps réel (<strong>Socket.IO</strong>), et <strong>WordPress / WooCommerce</strong> quand c'est le bon outil.</p><p>Concrètement : Zeno, Devkora, Solve, Djai, Homies, Entourage : des produits complets en ligne, pas des démos.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>3</u> Architecture &amp; infra</h4><p><strong>Docker, monorepos, files d'attente, sandboxing, observabilité, CI.</strong> Master <strong>cybersécurité &amp; cloud</strong> en cours.</p><p>Concrètement : Zeno se lance en une commande : ports libres détectés, secrets générés, stack santé vérifiée. Devkora exécute du code inconnu dans un sandbox isolé du réseau.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4><u>4</u> Pédagogie</h4><p>Responsable du Bachelor Epitech, accompagnateur pédagogique, bientôt responsable du <strong>Hub d'Innovation</strong>.</p><p>Concrètement : je conçois aussi les outils que la pédagogie utilise : détection du décrochage, suivi d'activité, évaluation technique, expériences immersives.</p></div>
+    </div>
+
+    <div class="sect rv">Ce que ça donne</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4>Pas de traduction perdue</h4><p>Aucun va-et-vient entre une maquette, un cahier des charges et une équipe d'infra. Ce que j'ai en tête à l'étape 1 est ce qui tourne à l'étape 4.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-check"/></svg></span><h4>Des décisions cohérentes</h4><p>Quand la même personne dessine l'écran et écrit la requête qui l'alimente, l'interface ne demande pas l'impossible au backend, et l'inverse.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4>Rien en boîte noire</h4><p>J'explique, je documente, je forme. C'est mon métier principal huit heures par jour, et ça déteint sur ma façon de coder.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4>Le contexte africain compris</h4><p>Mobile Money, connexions instables, téléphones d'entrée de gamme, budgets contraints. Mes produits sont pensés <strong>offline-first</strong> parce que c'est la réalité, pas une option.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ZENO -->
+<section class="page a-orange" id="p-zeno">
+  <div class="ph">
+    <div><div class="pk rv">Plateforme métier · open source · en production</div><h2 class="rv">Zeno</h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Une école, c'est des admissions, de la pédagogie, des présences, des notes, des factures, des événements et du suivi carrière. Dans la vraie vie, c'est <em>dix fichiers Excel qui ne se parlent pas</em> et trois personnes qui les recopient.</p>
+        <p class="lead rv" style="margin-top:1em">Zeno remplace tout ça par <em>une seule plateforme</em> : <em>12 outils et 12 identifiants</em> devenus un seul. Elle tourne aujourd'hui sur <em>deux campus en production</em>, pour plus de 530 utilisateurs actifs.</p>
+        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://zeno.epitools.bj" target="_blank" rel="noopener">Voir la plateforme</a></div>
+      </div>
+      <div class="shot rv"><img src="assets/img/zeno.jpg" alt="Zeno, page d'accueil"></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi rv"><b>530+</b><span>utilisateurs actifs</span></div>
+      <div class="kpi rv"><b>2</b><span>campus en production</span></div>
+      <div class="kpi rv"><b>20</b><span>modules · 12 outils remplacés</span></div>
+      <div class="kpi rv"><b>1 380</b><span>commits · open source</span></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>1</u> Docker-first, une seule commande</h4><p><code>make init</code> copie l'environnement, <strong>génère tous les secrets</strong> (JWT, session, mots de passe Mongo/MinIO/Redis), <strong>alloue dynamiquement les ports libres</strong>, construit les images, attend que les services soient sains et crée le compte admin.</p><p>Pourquoi : un nouveau contributeur doit être opérationnel en cinq minutes, pas en deux jours. C'est ce qui décide si un projet open source vit ou meurt.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-shield"/></svg></span><h4><u>2</u> Rien à remplir à la main</h4><p>Pas de <code>.env</code> à compléter, pas de mot de passe par défaut oublié en production. Les secrets sont générés avec <code>openssl rand</code> à l'installation.</p><p>Pourquoi : les fuites de données commencent presque toujours par un identifiant de démonstration laissé en place.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>3</u> Un outil de diagnostic intégré</h4><p><code>make doctor</code> vérifie le disque Docker, les ports, les secrets et l'état du stack. <code>make urls</code> imprime les URLs réelles, les ports ayant pu changer.</p><p>Pourquoi : sur le terrain, ce qui coûte du temps ce n'est pas le code, c'est comprendre pourquoi ça ne démarre pas.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-doc"/></svg></span><h4><u>4</u> Documentation API publiée</h4><p>La documentation de l'API est servie par l'application elle-même, en développement comme en production, jamais désynchronisée du code.</p></div>
+    </div>
+
+    <div class="sect rv">Stack</div>
+    <div class="stackrow rv"><div class="lb">Front</div><div class="vv"><b>React 19</b> · Vite · design system maison</div></div>
+    <div class="stackrow rv"><div class="lb">Back</div><div class="vv"><b>Node 22</b> · API REST documentée · JWT &amp; sessions</div></div>
+    <div class="stackrow rv"><div class="lb">Données</div><div class="vv"><b>MongoDB 7</b> · <b>Redis</b> · <b>MinIO</b> (stockage objet)</div></div>
+    <div class="stackrow rv"><div class="lb">Infra</div><div class="vv"><b>Docker Compose</b> (dev &amp; prod) · nginx · Makefile d'orchestration · e2e</div></div>
+    <div class="stackrow rv"><div class="lb">Mon rôle</div><div class="vv">Conception produit, architecture, développement, déploiement</div></div>
+
+    <div class="punch rv"><p>Ce n'est plus un projet d'école : c'est un outil dont d'autres dépendent tous les jours. Ça change la façon d'écrire chaque ligne.</p></div>
+  </div>
+</section>
+
+<!-- DJAI -->
+<section class="page a-green" id="p-djai">
+  <div class="ph">
+    <div><div class="pk rv">Application mobile · 100 % locale</div><h2 class="rv">Djai</h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">En Afrique de l'Ouest, on paie tout au <em>Mobile Money</em> : le taxi, le marché, la facture, le loyer. À la fin du mois, personne ne sait où est parti l'argent, et les applications de budget classiques demandent de <em>tout saisir à la main</em>. Personne ne le fait.</p>
+        <p class="lead rv" style="margin-top:1em">Djai ne demande rien. Elle <em>lit les SMS</em> que l'opérateur envoie déjà, reconnaît chaque opération, et construit le budget toute seule. <em>MTN MoMo, Moov et comptes bancaires</em>, plus le suivi des dettes et des objectifs d'épargne.</p>
+        <div class="rv" style="margin-top:1.2em">
+          <a class="lnk" href="https://play.google.com/store/apps/details?id=com.djai.edwin&amp;hl=fr" target="_blank" rel="noopener">Sur le Play Store</a>
+          <a class="lnk gh" href="https://djai-landing.vercel.app/" target="_blank" rel="noopener">Le site</a>
+          <a class="lnk gh" href="https://www.youtube.com/watch?v=stqJuR8NHJo" target="_blank" rel="noopener">La vidéo</a>
+        </div>
+      </div>
+      <div class="shot rv"><img src="assets/img/djai.jpg" alt="Djai, page de présentation de l'application"></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi rv"><b>Play Store</b><span>publiée et téléchargeable</span></div>
+      <div class="kpi rv"><b>3</b><span>sources lues : MTN MoMo, Moov, comptes bancaires</span></div>
+      <div class="kpi rv"><b>0</b><span>serveur, 0 compte à créer</span></div>
+      <div class="kpi rv"><b>100 %</b><span>gratuit, hors-ligne, sécurisé</span></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-offline"/></svg></span><h4><u>1</u> Rien ne quitte le téléphone</h4><p>Aucun serveur, aucun compte, aucune synchronisation. Toutes les données restent en local sur l'appareil.</p><p>Pourquoi : on parle de <strong>relevés financiers</strong>. Demander à quelqu'un d'envoyer l'historique de son argent à un serveur inconnu, c'est demander une confiance qu'aucune application jeune ne mérite. Le choix technique <em>est</em> l'argument produit.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-doc"/></svg></span><h4><u>2</u> Un analyseur qui comprend vraiment</h4><p>Transferts envoyés et reçus, paiements, retraits, dépôts, transactions UEMOA/ONAFRIQ. L'analyseur extrait <strong>montant, frais, destinataire, numéro, solde et identifiant</strong> de chaque message.</p><p>Pourquoi : les frais sont le poste que personne ne compte, et c'est souvent le plus élevé sur un an.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-shield"/></svg></span><h4><u>3</u> Pensée pour être ouverte en public</h4><p><strong>Mode privé</strong> qui masque d'un geste tous les montants, noms et numéros. <strong>Code PIN</strong> à l'ouverture. <strong>Captures d'écran bloquées</strong> sous Android.</p><p>Pourquoi : on consulte son solde dans un taxi ou dans une file d'attente. Le contexte d'usage fait partie du cahier des charges.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4><u>4</u> Bien plus qu'un relevé</h4><p>Tableau de bord (entrées, sorties, frais, solde net), graphiques sur 7 jours ou 6 mois, filtres, recherche, <strong>export PDF</strong>, thème clair/sombre. Et surtout : <strong>suivi des dettes</strong> et <strong>objectifs d'épargne</strong>, les deux choses qu'un relevé bancaire ne dit jamais.</p></div>
+    </div>
+
+    <div class="sect rv">Stack</div>
+    <div class="stackrow rv"><div class="lb">App</div><div class="vv"><b>React Native</b> · <b>Expo SDK 54</b> · TypeScript · Expo Router</div></div>
+    <div class="stackrow rv"><div class="lb">État</div><div class="vv"><b>Zustand</b> · TanStack Query · AsyncStorage</div></div>
+    <div class="stackrow rv"><div class="lb">Natif</div><div class="vv">Lecture SMS Android · <b>expo-secure-store</b> (PIN) · <b>expo-screen-capture</b></div></div>
+    <div class="stackrow rv"><div class="lb">Diffusion</div><div class="vv"><b>Google Play</b> · site de présentation · vidéo de démonstration</div></div>
+    <div class="stackrow rv"><div class="lb">Mon rôle</div><div class="vv">Idée, design, développement, publication · projet personnel</div></div>
+
+    <div class="punch rv"><p>Le meilleur argument de vente de cette application, c'est ce qu'elle ne fait pas : elle n'envoie rien.</p></div>
+  </div>
+</section>
+
+<!-- DEVKORA -->
+<section class="page a-blue" id="p-devkora">
+  <div class="ph">
+    <div><div class="pk rv">SaaS multi-tenant · évaluation de code</div><h2 class="rv">Devkora</h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Un CV ne dit pas si quelqu'un sait coder. Les tests maison sont longs à corriger, subjectifs, impossibles à comparer d'un candidat à l'autre. Devkora donne un <em>énoncé</em>, un <em>vrai éditeur</em>, une <em>exécution réelle en sandbox</em>, et des <em>critères validés en direct</em> sous les yeux du candidat.</p>
+        <p class="lead rv" style="margin-top:1em"><em>Recruteurs, écoles et apprenants sur un même moteur</em> : tests techniques, salles de classe et parcours d'auto-formation. Anti-cheat embarqué, multi-tenant, white-label.</p>
+        <p class="cap rv">&lt; fait au Bénin · hébergé en Afrique · un plan gratuit sans carte bancaire /&gt;</p>
+      </div>
+      <div class="shot rv"><img src="assets/img/devkora.webp" alt="Devkora, page d'accueil"></div>
+    </div>
+
+    <div class="blocks c4">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4><u>1</u> Recruteurs</h4><p>Évaluations chronométrées, anti-triche, invitations de candidats, intégrations ATS.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4><u>2</u> Écoles</h4><p>Groupes de pratique, classements, parcours d'apprentissage, analytique de classe.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4><u>3</u> Autodidactes</h4><p>Pratique libre, XP gamifiée, profil public, certifications.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>4</u> Un seul moteur</h4><p>Les trois publics tournent sur la même base multi-tenant. Ce n'est pas trois produits, c'est une architecture.</p></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-shield"/></svg></span><h4><u>1</u> Exécuter du code inconnu, sans se faire ouvrir</h4><p>Le code des candidats tourne dans <strong>Judge0</strong>, conteneurisé, <strong>sur un réseau interne uniquement</strong>, aucune sortie possible vers l'extérieur.</p><p>Pourquoi : une plateforme d'évaluation exécute par définition du code hostile. C'est la première contrainte de sécurité, pas la dernière.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-db"/></svg></span><h4><u>2</u> Multi-tenant dès la première ligne</h4><p>Isolation des données par organisation, JWT multi-tenant, authentification e-mail, Google et Microsoft.</p><p>Pourquoi : rajouter le multi-tenant après coup oblige à réécrire toutes les requêtes. C'est une décision de jour un.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-bolt"/></svg></span><h4><u>3</u> Tout ce qui est lent part en file d'attente</h4><p><strong>BullMQ + Redis</strong> pour les e-mails, la correction asynchrone et les exports.</p><p>Pourquoi : la correction d'un test ne doit jamais bloquer la réponse HTTP d'un candidat qui a le chronomètre qui tourne.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>4</u> Un monorepo qui reste lisible</h4><p><strong>Turborepo</strong> : l'app Next.js, le paquet base de données (Prisma), l'UI partagée et les types/schémas Zod communs.</p></div>
+    </div>
+
+    <div class="sect rv">Stack</div>
+    <div class="stackrow rv"><div class="lb">App</div><div class="vv"><b>Next.js 15</b> (App Router, RSC, TypeScript strict) · <b>shadcn/ui</b> · Tailwind 4 · Monaco</div></div>
+    <div class="stackrow rv"><div class="lb">Données</div><div class="vv"><b>MongoDB 6</b> + <b>Prisma 6</b> · NextAuth v5</div></div>
+    <div class="stackrow rv"><div class="lb">Exécution</div><div class="vv"><b>Judge0</b> en Docker privilégié, réseau interne · <b>BullMQ</b> + Redis</div></div>
+    <div class="stackrow rv"><div class="lb">Qualité</div><div class="vv">Turborepo · GlitchTip · OpenTelemetry</div></div>
+    <div class="stackrow rv"><div class="lb">Mon rôle</div><div class="vv">Conception, architecture, développement</div></div>
+
+    <div class="punch rv"><p>Une plateforme d'évaluation exécute du code écrit par des inconnus. Toute l'architecture découle de cette phrase.</p></div>
+  </div>
+</section>
+
+
+<!-- DESIGN -->
+<section class="page a-magenta" id="p-design">
+  <div class="ph">
+    <div><div class="pk rv">Avant le code, et toujours</div><h2 class="rv">Le <u>design</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split wide">
+      <div>
+        <p class="lead rv">J'ai gagné ma vie avec <em>Photoshop et Illustrator</em> avant d'en gagner une ligne avec du code. Affiches d'événements, identités de marque, packaging, campagnes de recrutement, menus, réseaux sociaux : c'est le métier que j'exerçais à Abidjan, et celui que je continue d'exercer chez Afrolead.</p>
+        <p class="lead rv" style="margin-top:1em">Ce n'est pas une ligne décorative sur un CV de développeur. <em>C'est ce qui fait que je dessine les interfaces que je code.</em></p>
+        <div class="rv" style="margin-top:1.2em">
+          <a class="lnk" href="https://www.behance.net/porpix24a0f2" target="_blank" rel="noopener">Mon Behance</a>
+          <a class="lnk gh" href="https://www.afrolead.ci/" target="_blank" rel="noopener">Afrolead</a>
+        </div>
+      </div>
+      <div>
+        <div class="kpis" style="grid-template-columns:1fr 1fr">
+          <div class="kpi rv"><b>2015</b><span>mes premiers visuels payés</span></div>
+          <div class="kpi rv"><b>7</b><span>outils Adobe utilisés en production</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sect rv">Quelques créations</div>
+    <div class="gal">
+      <figure class="rv"><img src="assets/img/design/projectweek.webp" alt="Project Week 2022 · Epitech" loading="lazy"><figcaption>Project Week 2022 · Epitech</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/build4win.webp" alt="Festival Maker Build4Win · Epitech" loading="lazy"><figcaption>Festival Maker Build4Win · Epitech</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/hackathon.webp" alt="Novembre Numérique 2021 · hackathon" loading="lazy"><figcaption>Novembre Numérique 2021 · hackathon</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/v14.webp" alt="Campagne de recrutement · Pulse" loading="lazy"><figcaption>Campagne de recrutement · Pulse</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/echopen.webp" alt="Sonde échographique echOpen · Bénin" loading="lazy"><figcaption>Sonde échographique echOpen · Bénin</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/e3.webp" alt="Campagne don du sang" loading="lazy"><figcaption>Campagne don du sang</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/beer.webp" alt="Packaging Youki Pomme" loading="lazy"><figcaption>Packaging Youki Pomme</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/tshirt.webp" alt="Béyo Taago Challenge · textile" loading="lazy"><figcaption>Béyo Taago Challenge · textile</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/nias.webp" alt="Nia's World · beauté cosmétique" loading="lazy"><figcaption>Nia's World · beauté cosmétique</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/niasrs.webp" alt="Nia's World · réseaux sociaux" loading="lazy"><figcaption>Nia's World · réseaux sociaux</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/gout.webp" alt="Les Goûts de l'été · événement" loading="lazy"><figcaption>Les Goûts de l'été · événement</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/menu.webp" alt="Les Goûts de l'été · menu" loading="lazy"><figcaption>Les Goûts de l'été · menu</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/plat.webp" alt="Enjoy Food · menu de la semaine" loading="lazy"><figcaption>Enjoy Food · menu de la semaine</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/cleanco.webp" alt="PECB Lead Cloud Security Manager" loading="lazy"><figcaption>PECB Lead Cloud Security Manager</figcaption></figure>
+      <figure class="rv"><img src="assets/img/design/v18.webp" alt="Bénin Textile & Cotton Industry" loading="lazy"><figcaption>Bénin Textile & Cotton Industry</figcaption></figure>
+    </div>
+
+    <div class="sect rv">Ce que le design a changé dans ma façon de coder</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>Je sais à quoi ça doit ressembler</h4><p>La plupart des développeurs attendent une maquette. Je commence par la faire. Ça supprime l'aller-retour le plus coûteux d'un projet, et ça évite les interfaces qui marchent mais que personne n'a envie d'ouvrir.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4>Je sais défendre un parti pris</h4><p>Dix ans à présenter des propositions à des clients qui n'aiment pas la première version. On apprend à expliquer <strong>pourquoi</strong> une décision visuelle sert leur objectif, pas mon goût.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-target"/></svg></span><h4>Je pense au lecteur, pas à l'écran</h4><p>Une affiche se lit à trois mètres, en deux secondes, souvent mal imprimée. Cette contrainte-là forme une hiérarchie de l'information qui sert ensuite chaque tableau de bord et chaque formulaire.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4>Et je livre des fichiers propres</h4><p>Formats d'impression, déclinaisons réseaux sociaux, versions animées, respect d'une charte existante. Le design, c'est aussi de la rigueur d'exécution, exactement comme le code.</p></div>
+    </div>
+
+    <div class="sect rv">Les outils</div>
+    <div class="stackrow rv"><div class="lb">Édition</div><div class="vv"><b>Photoshop</b> · <b>Illustrator</b> · <b>InDesign</b></div></div>
+    <div class="stackrow rv"><div class="lb">Interface</div><div class="vv"><b>Figma</b> · Adobe XD</div></div>
+    <div class="stackrow rv"><div class="lb">Motion &amp; vidéo</div><div class="vv"><b>After Effects</b> · <b>Premiere Pro</b></div></div>
+    <div class="stackrow rv"><div class="lb">Terrain</div><div class="vv">Afrolead (agence) · Intégrale Group · Lune Groupe · Epitech · clients directs</div></div>
+
+    <div class="punch rv"><p>Je n'ai pas appris le design pour faire joli. Je l'ai appris pour être compris.</p></div>
+  </div>
+</section>
+
+<!-- ENTOURAGE -->
+<section class="page a-magenta" id="p-entourage">
+  <div class="ph">
+    <div><div class="pk rv">Client · plateforme en production</div><h2 class="rv">Entourage <u>Africa</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Prendre une décision en Afrique sans avoir accès aux bonnes personnes, c'est décider <em>à l'aveugle</em>. Les experts qui comptent (dirigeants, spécialistes sectoriels, opérateurs de terrain) sont exactement ceux qu'on ne peut pas joindre.</p>
+        <p class="lead rv" style="margin-top:1em">Entourage les rend joignables : on choisit un expert, on réserve un <em>appel vidéo privé</em>, on repart avec des conseils applicables.</p>
+        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://entourage.africa" target="_blank" rel="noopener">Voir la plateforme</a></div>
+      </div>
+      <div class="shot rv"><img src="assets/img/entourage.webp" alt="Entourage Africa, annuaire d'experts"></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi rv"><b>+100</b><span>experts référencés</span></div>
+      <div class="kpi rv"><b>30</b><span>secteurs d'activité</span></div>
+      <div class="kpi rv"><b>35</b><span>pays couverts</span></div>
+      <div class="kpi rv"><b>2</b><span>langues : français et anglais</span></div>
+    </div>
+
+    <div class="sect rv">Ce que la plateforme fait</div>
+    <div class="blocks c4">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4><u>1</u> Annuaire d'experts</h4><p>Une sélection exclusive, par secteur et par pays. Le catalogue <em>est</em> le produit : sa qualité fait la valeur du service.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-video"/></svg></span><h4><u>2</u> Appel vidéo privé</h4><p>Réservation d'un créneau, visioconférence, conseils sur mesure. Le cœur de la promesse.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4><u>3</u> Événements &amp; contenus</h4><p>Rencontres et ressources gratuites : la porte d'entrée de ceux qui ne sont pas encore prêts à payer.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-coin"/></svg></span><h4><u>4</u> Entourage+</h4><p>Un abonnement pour les utilisateurs réguliers, en plus des consultations à l'unité.</p></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4><u>1</u> Bilingue dès la conception</h4><p>Français et anglais sur l'ensemble du parcours, pas seulement sur la page d'accueil.</p><p>Pourquoi : 35 pays couverts, c'est l'Afrique francophone <strong>et</strong> anglophone. Un site monolingue coupe la moitié du continent.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-target"/></svg></span><h4><u>2</u> Le diagnostic gratuit comme porte d'entrée</h4><p>L'appel à l'action principal n'est pas «&nbsp;acheter&nbsp;» mais «&nbsp;réservez un diagnostic gratuit&nbsp;».</p><p>Pourquoi : on ne paie pas un inconnu pour un conseil. Il faut d'abord prouver la valeur, ensuite facturer.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-msg"/></svg></span><h4><u>3</u> WhatsApp, pas un formulaire</h4><p>Contact direct par WhatsApp, intégré à l'interface.</p><p>Pourquoi : ici, WhatsApp <strong>est</strong> le canal professionnel. Imposer un formulaire de contact, c'est perdre les gens qui voulaient écrire.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>4</u> WordPress et WooCommerce, assumés</h4><p>Le socle est <strong>WordPress + Elementor</strong>, le moteur de paiement et d'abonnement est <strong>WooCommerce</strong>.</p><p>Pourquoi : le client devait pouvoir publier ses experts, ses événements et ses contenus <strong>sans m'appeler</strong>, et encaisser dès l'ouverture. Un développement sur mesure aurait retardé la mise en ligne de plusieurs mois pour un résultat identique côté utilisateur.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-check"/></svg></span><h4><u>5</u> La preuve par les visages</h4><p>Témoignages vidéo hébergés et mis en avant sur la page d'accueil.</p><p>Pourquoi : pour un service fondé sur la confiance entre personnes, le témoignage filmé convainc mieux que n'importe quel argumentaire.</p></div>
+    </div>
+
+    <div class="sect rv">Stack</div>
+    <div class="stackrow rv"><div class="lb">Socle</div><div class="vv"><b>WordPress</b> · <b>Elementor</b> · thème sur mesure</div></div>
+    <div class="stackrow rv"><div class="lb">Commerce</div><div class="vv"><b>WooCommerce</b> · consultations à l'unité et abonnement <b>Entourage+</b> · paiement en ligne</div></div>
+    <div class="stackrow rv"><div class="lb">Bilingue</div><div class="vv">Parcours complet FR / EN</div></div>
+    <div class="stackrow rv"><div class="lb">Contact</div><div class="vv">WhatsApp intégré · réservation de créneaux · témoignages vidéo</div></div>
+    <div class="stackrow rv"><div class="lb">Mon rôle</div><div class="vv">Conception, intégration, mise en production, accompagnement du client</div></div>
+
+    <div class="punch rv"><p>Le produit n'est pas la plateforme : c'est l'accès. Toute l'interface sert à raccourcir la distance entre quelqu'un qui doute et quelqu'un qui sait.</p></div>
+  </div>
+</section>
+
+<!-- SOLVE -->
+<section class="page a-blue" id="p-solve">
+  <div class="ph">
+    <div><div class="pk rv">Plateforme communautaire · web</div><h2 class="rv">Solve</h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Un développeur qui construit quelque chose ici n'a <em>nulle part où le montrer</em>. Pas de vitrine, pas de communauté, pas d'occasion de se faire repérer autrement qu'en partant.</p>
+        <p class="lead rv" style="margin-top:1em">Solve met <em>le craft des devs à l'honneur</em> : ni un GitHub froid, ni un portfolio solitaire. <em>Même un projet en local mérite d'exister.</em></p>
+        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://ima-solve.vercel.app/" target="_blank" rel="noopener">Voir la plateforme</a></div>
+      </div>
+      <div class="shot rv"><img src="assets/img/solve.webp" alt="Solve, page d'accueil"></div>
+    </div>
+
+    <div class="blocks c4">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>1</u> Projets</h4><p>Chaque développeur soumet ses projets, avec ses statistiques et sa page dédiée. C'est la vitrine.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-bolt"/></svg></span><h4><u>2</u> Challenges</h4><p>Hackathons et coding challenges : on se mesure, on progresse, on se fait remarquer sur du concret.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4><u>3</u> Événements</h4><p>Meetups et showcases en présentiel. La communauté en ligne ne vaut que si elle se rencontre.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-msg"/></svg></span><h4><u>4</u> Idées &amp; articles</h4><p>Espace de <strong>co-building</strong> : on publie une idée, d'autres viennent la construire avec vous. Et un espace de publication pour les membres.</p></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-check"/></svg></span><h4><u>1</u> 54 tests qui tournent sans base de données</h4><p>Jest + Supertest, <strong>aucune connexion cloud nécessaire</strong> pour lancer la suite.</p><p>Pourquoi : une plateforme communautaire vit de contributions extérieures. Si les tests exigent des identifiants Supabase, personne ne contribue. C'est la barrière la plus sous-estimée d'un projet ouvert.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-db"/></svg></span><h4><u>2</u> Supabase plutôt qu'un back-office maison</h4><p>Postgres, authentification et stockage managés. Le serveur <strong>Express 5</strong> ne porte que la logique métier et la documentation.</p><p>Pourquoi : réécrire l'authentification et la gestion des sessions, c'est trois mois qui n'apportent rien au produit, et une surface d'attaque de plus.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>3</u> Tout tourne en local</h4><p>La pile Supabase complète (Postgres + Auth + Studio) démarre en Docker sur la machine du développeur, en une commande.</p><p>Pourquoi : même principe que Zeno. Un projet qu'on ne peut pas lancer chez soi est un projet auquel on ne contribue pas.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-doc"/></svg></span><h4><u>4</u> API documentée et testable</h4><p><strong>Swagger UI</strong> servi sur <code>/api-docs</code>, et une collection <strong>Postman versionnée</strong> dans le dépôt.</p><p>Pourquoi : le front et le back avancent en parallèle. La documentation est le contrat entre les deux.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4><u>5</u> Un front qui donne envie</h4><p>Direction artistique <strong>«&nbsp;brutaliste premium&nbsp;»</strong> : typographie forte, aplats, animations au défilement (Framer Motion, Lenis).</p><p>Pourquoi : c'est une vitrine de développeurs. Si le site est fade, personne n'a envie d'y poser son travail.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-code"/></svg></span><h4><u>6</u> Next.js 16 et React 19</h4><p>Versions récentes assumées, App Router, rendu serveur pour le référencement des pages projet.</p><p>Pourquoi : la valeur d'une vitrine, c'est d'être trouvée par un recruteur sur un moteur de recherche.</p></div>
+    </div>
+
+    <div class="sect rv">Stack</div>
+    <div class="stackrow rv"><div class="lb">Front</div><div class="vv"><b>Next.js 16</b> (App Router) · <b>React 19</b> · TypeScript · Tailwind CSS 4 · Framer Motion · Lenis</div></div>
+    <div class="stackrow rv"><div class="lb">État</div><div class="vv">TanStack Query · Zustand</div></div>
+    <div class="stackrow rv"><div class="lb">Back</div><div class="vv"><b>Node 20+</b> · <b>Express 5</b> · rate limiting · CORS</div></div>
+    <div class="stackrow rv"><div class="lb">Données</div><div class="vv"><b>Supabase</b> (Postgres, Auth) · schémas SQL versionnés · CLI Supabase en local</div></div>
+    <div class="stackrow rv"><div class="lb">Qualité</div><div class="vv"><b>Jest + Supertest</b> · 54 tests · <b>Swagger UI</b> · collection Postman</div></div>
+    <div class="stackrow rv"><div class="lb">Mon rôle</div><div class="vv">Conception produit, architecture, développement front et back</div></div>
+
+    <div class="punch rv"><p>Le vrai problème n'est pas que les développeurs d'ici manquent de talent. C'est qu'ils n'ont aucun endroit où le rendre visible.</p></div>
+  </div>
+</section>
+
+
+<!-- HOMIES -->
+<section class="page a-magenta" id="p-homies">
+  <div class="ph">
+    <div><div class="pk rv">Party game multijoueur temps réel</div><h2 class="rv">Homies</h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Les soirées où chacun finit sur son téléphone. Ou pire : deux personnes sur une manette pendant que six regardent. Je voulais que les jeunes autour de moi <em>s'amusent ensemble</em>. Le code n'était qu'un moyen.</p>
+        <p class="lead rv" style="margin-top:1em">On lance une partie sur la télé, et <em>tout le monde joue depuis son propre téléphone</em> : un QR code à scanner ou un code à six caractères. Aucune application à installer.</p>
+      </div>
+      <div class="shot tall rv"><img src="assets/img/homies-mobile.webp" alt="Homies, écran d'accueil sur mobile"></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi rv"><b>25</b><span>modes de jeu distincts</span></div>
+      <div class="kpi rv"><b>9</b><span>modificateurs qui changent les règles</span></div>
+      <div class="kpi rv"><b>363</b><span>commits</span></div>
+      <div class="kpi rv"><b>0</b><span>application à installer</span></div>
+      <div class="kpi rv"><b>JPO</b><span>utilisé en conditions réelles pendant une journée portes ouvertes Epitech</span></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-phone"/></svg></span><h4><u>1</u> L'hôte est l'écran, le téléphone est la manette</h4><p>La télé affiche la partie, chaque joueur contrôle depuis son navigateur mobile. PWA + <strong>Socket.IO</strong> pour le temps réel.</p><p>Pourquoi : c'est le seul modèle qui laisse jouer huit personnes sans matériel supplémentaire.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-bolt"/></svg></span><h4><u>2</u> Des modes, et des règles par-dessus</h4><p>25 formats (quiz, vrai/faux, sondage, anagramme, estimation, intrus, memory, bluff, blind test, devine le son, mode couple) et <strong>9 modificateurs</strong> qui se combinent : battle royale, la bombe, quitte ou double, mise libre, buzzer, marathon, équipes, mode soirée.</p><p>Pourquoi : 25 × 9 combinaisons, c'est une plateforme. 25 modes seuls, c'est un catalogue qu'on épuise en trois soirées.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-coin"/></svg></span><h4><u>3</u> Une économie pour faire revenir</h4><p>Monnaie virtuelle (les «&nbsp;Djais&nbsp;»), boutique de cadres d'avatar, titres, couleurs de pseudo, emotes et fonds de salle. Défis quotidiens avec <strong>notifications Web Push</strong>.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-offline"/></svg></span><h4><u>4</u> Zéro bundler</h4><p>Front en HTML/CSS/JS natif, UI brutaliste maison, pas de React ni de webpack.</p><p>Pourquoi : le jeu doit démarrer instantanément sur un téléphone d'entrée de gamme avec un réseau moyen. Chaque kilo-octet compte.</p></div>
+    </div>
+
+    <div class="sect rv">Stack</div>
+    <div class="stackrow rv"><div class="lb">Temps réel</div><div class="vv"><b>Node.js</b> · Express · <b>Socket.IO</b></div></div>
+    <div class="stackrow rv"><div class="lb">Comptes</div><div class="vv"><b>Firebase</b> (Auth &amp; Firestore) · monnaie, statistiques, cosmétiques</div></div>
+    <div class="stackrow rv"><div class="lb">Mobile</div><div class="vv"><b>PWA</b> · Web Push (VAPID) · QR code</div></div>
+    <div class="stackrow rv"><div class="lb">Mesure</div><div class="vv"><b>Umami</b> auto-hébergé</div></div>
+    <div class="stackrow rv"><div class="lb">Mon rôle</div><div class="vv">Idée, design, développement · projet personnel</div></div>
+
+    <div class="punch rv"><p>Parti d'un clone de Kahoot. Devenu une plateforme de jeu avec économie, amis et défis quotidiens.</p></div>
+  </div>
+</section>
+
+<!-- LUMIO -->
+<section class="page a-green" id="p-lumio">
+  <div class="ph">
+    <div><div class="pk rv">SaaS PWA · en développement</div><h2 class="rv">Lumio</h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Dîme, quête, dons, services paroissiaux : dans la plupart des paroisses d'Afrique francophone, tout cela se gère encore <em>en espèces et sur un cahier</em>. Pas par choix : il n'y a ni budget logiciel, ni informaticien, ni carte bancaire.</p>
+        <p class="lead rv" style="margin-top:1em">Lumio permet de donner <em>par Mobile Money en quelques secondes</em>, et à la paroisse de suivre ses recettes et ses membres.</p>
+        <p class="cap rv">&lt; en développement · capture d'écran à venir /&gt;</p>
+      </div>
+      <div class="shot rv" style="padding:clamp(14px,2.4vh,30px)">
+        <svg viewBox="0 0 420 210" style="width:100%;height:auto" aria-hidden="true">
+          <g font-family="IBM Plex Mono" font-size="9">
+            <text x="0" y="14" fill="var(--i38)" letter-spacing="1.4">CE QUI SE PASSE AUJOURD'HUI</text>
+            <rect x="0" y="26" width="120" height="26" fill="var(--i08)"/><text x="10" y="43" fill="var(--i62)">ESPÈCES</text>
+            <path d="M126 39h22" stroke="var(--i38)" stroke-width="1.2"/>
+            <rect x="154" y="26" width="120" height="26" fill="var(--i08)"/><text x="164" y="43" fill="var(--i62)">UN CAHIER</text>
+            <path d="M280 39h22" stroke="var(--i38)" stroke-width="1.2"/>
+            <rect x="308" y="26" width="112" height="26" fill="var(--i08)"/><text x="318" y="43" fill="var(--c-orange)">RIEN DE SUIVI</text>
+            <text x="0" y="92" fill="var(--i38)" letter-spacing="1.4">AVEC LUMIO</text>
+            <rect x="0" y="104" width="120" height="30" fill="var(--ac)"/><text x="10" y="123" fill="var(--ac-ink)">LE FIDÈLE</text>
+            <path d="M126 119h22" stroke="var(--ac-t)" stroke-width="1.4"/>
+            <rect x="154" y="104" width="120" height="30" fill="var(--i08)"/><text x="164" y="123" fill="var(--ink)">MOBILE MONEY</text>
+            <path d="M280 119h22" stroke="var(--ac-t)" stroke-width="1.4"/>
+            <rect x="308" y="104" width="112" height="30" fill="var(--ac)" opacity=".55"/><text x="318" y="123" fill="var(--ink)">LA PAROISSE</text>
+            <text x="0" y="156" fill="var(--ac-t)" font-size="8">QUELQUES SECONDES, DEPUIS N'IMPORTE QUEL TÉLÉPHONE</text>
+            <path d="M0 172h420" stroke="var(--i16)" stroke-width="1"/>
+            <text x="0" y="192" fill="var(--i38)" font-size="8">DÎME · QUÊTE · DONS · SERVICES PAROISSIAUX · SUIVI DES MEMBRES</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-phone"/></svg></span><h4><u>1</u> PWA, pas application native</h4><p>Aucun téléchargement, aucun store, aucune place mémoire à libérer. On ouvre un lien ou on scanne un code.</p><p>Pourquoi : demander à une communauté entière d'installer une application, c'est perdre la moitié des gens à la première étape.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-coin"/></svg></span><h4><u>2</u> Mobile Money natif</h4><p>Le paiement se fait avec l'outil que tout le monde a déjà et utilise déjà tous les jours.</p><p>Pourquoi : concevoir pour la carte bancaire en Afrique francophone, c'est concevoir pour une minorité.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4><u>3</u> Un secteur que personne ne regarde</h4><p>La paroisse n'est pas une cible tech. C'est justement pour ça que le besoin est réel et non servi.</p><p>Ce que ça dit de ma façon de travailler : je pars du terrain, pas d'un marché à la mode.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-db"/></svg></span><h4><u>4</u> Modèle SaaS</h4><p>Une plateforme, plusieurs paroisses, chacune avec ses membres, ses recettes et ses services.</p></div>
+    </div>
+
+    <div class="punch rv"><p>Les meilleurs produits ne viennent pas d'une étude de marché. Ils viennent d'un endroit qu'on connaît et où rien ne marche.</p></div>
+  </div>
+</section>
+
+<!-- EPITECH -->
+<section class="page a-blue" id="p-epitech">
+  <div class="ph">
+    <div><div class="pk rv">Epitech · 2019 → aujourd'hui</div><h2 class="rv">Étudiant, puis <u>responsable</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <p class="lead rv" style="max-width:76ch;margin-bottom:clamp(12px,1.8vh,22px)">Je suis entré comme étudiant dans la première promotion d'Epitech Bénin. Deux ans plus tard j'ai rejoint l'équipe pédagogique. Aujourd'hui je dirige le Bachelor et je pars monter le <em>Hub d'Innovation d'Abidjan</em>.</p>
+
+    <div class="tl">
+      <div class="r rv"><div class="y">2019 → 2022</div><div class="c"><b>Étudiant, Bachelor Expert en informatique et SI</b><span>Première promotion d'Epitech Bénin. Stages, UNICEF, Echopen, junior entreprise, premier prix Project Week.</span></div></div>
+      <div class="r rv"><div class="y">2021</div><div class="c"><b>Accompagnateur pédagogique (APE)</b><span>Je rejoins l'équipe pédagogique deux ans après ma propre rentrée.</span></div></div>
+      <div class="r rv"><div class="y">oct. 2022 → sept. 2024</div><div class="c"><b>Responsable de la promotion 2027</b><span>Encadrement et suivi d'une promotion entière : évolution académique de chaque étudiant, intégration dans la pédagogie active.</span></div></div>
+      <div class="r rv"><div class="y">sept. 2024 → </div><div class="c"><b>Responsable du Bachelor, Epitech Bénin</b><span>Coordination de l'ensemble des activités académiques et de la qualité pédagogique du programme.</span></div></div>
+      <div class="r rv"><div class="y">aujourd'hui</div><div class="c"><b>Abidjan, Hub d'Innovation</b><span>Accompagnateur pédagogique des premières années, et construction du Hub : là où l'idée d'un étudiant devient un prototype, puis un projet.</span></div></div>
+    </div>
+
+    <div class="sect rv">Les outils que j'ai construits pour la pédagogie</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-check"/></svg></span><h4>Suivis</h4><p>Un moteur de <strong>suivi proactif et différencié</strong> des étudiants. Pas un formulaire plat : chaque réponse devient un <strong>score de risque multi-axes</strong> qui permet de détecter le décrochage avant que l'étudiant ne le dise.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-clock"/></svg></span><h4>epitech-tracker</h4><p>Agent de suivi d'activité tournant en <strong>service systemd</strong> sur les laptops Ubuntu fournis par Epitech Côte d'Ivoire, alimentant la plateforme destinée aux parents.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-doc"/></svg></span><h4>Bulletins Insight</h4><p>Suite d'outils pédagogiques pour générer et gérer les commentaires de bulletins : la tâche la plus chronophage et la moins valorisée du métier.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-code"/></svg></span><h4>Devkora</h4><p>La plateforme d'évaluation technique utilisée pour les étudiants et les candidats. Née comme un module de Zeno, devenue un produit autonome.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>FORGE &amp; les expériences JPO</h4><p>Des expériences immersives pour faire découvrir l'informatique aux lycéens et à leurs parents pendant les journées portes ouvertes : narration, mini-jeux, terminal, cinématique.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-msg"/></svg></span><h4>Ce que ça dit</h4><p>Je ne suis pas un pédagogue qui parle de technique, ni un développeur qui donne des cours. <strong>Je construis les outils de mon propre métier</strong>, et c'est le meilleur terrain d'essai qui existe.</p></div>
+    </div>
+
+    <div class="punch rv"><p>Je suis passé d'étudiant à responsable en trois ans, dans la même école. Puis j'ai codé les outils dont cette école avait besoin.</p></div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="page a-orange" id="p-clients">
+  <div class="ph">
+    <div><div class="pk rv">Ils m'ont fait confiance</div><h2 class="rv">Clients &amp; <u>institutions</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="blocks c4">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4>Entourage Africa</h4><p>Plateforme de mise en relation avec des experts africains : <strong>+100 experts, 30 secteurs, 35 pays</strong>. Bilingue, abonnement, appels vidéo.</p><p class="cap">Voir sa fiche complète dans le bento</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4>UNICEF Bénin</h4><p>Designer UI/UX et développeur mobile sur <strong>UReport (MURYA)</strong> : une application permettant aux jeunes Béninois de s'informer et de répondre à des sondages interactifs. Et <strong>lauréat du challenge Hack Covid</strong> avec une application de sensibilisation.</p><p class="cap">2019 · 2021</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-video"/></svg></span><h4>Echopen, Paris</h4><p>À distance depuis Cotonou. D'abord <strong>chef de projet junior</strong> (cahier des charges pour l'intégration d'images échographiques dans la plateforme médicale Kéa), puis <strong>développeur FrontEnd</strong> sur la même plateforme.</p><p class="cap">2019 · 2021 · équipe française, travail 100 % à distance</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4>ADCVI</h4><p>Abidjan. Site institutionnel de l'<strong>Association pour le Développement des Cultures Vivrières Intensives</strong>, ONG agricole fondée en 2003. Site en ligne, construit en <strong>Vue</strong>.</p><p><a class="lnk" href="https://adcvi.ci/" target="_blank" rel="noopener">adcvi.ci</a></p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>MTN Bénin</h4><p><strong>Premier prix</strong> du concours de création du logo <strong>FreshZone</strong>.</p><p class="cap">2022</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4>Epitech Bénin</h4><p>Direction de la <strong>refonte du site web</strong> comme stagiaire développeur <strong>WordPress</strong> : développement FrontEnd, optimisation des interfaces, intégration des contenus.</p><p class="cap">2019 · 2020</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4>Ministères &amp; organisations internationales</h4><p>Missions menées pendant et après mes études, via Epitech Bénin.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4>Afrolead</h4><p>Côte d'Ivoire. <strong>Agence de communication créative et digitale</strong> : image de marque, conception graphique, UI/UX, web, packaging, production vidéo. J'y suis <strong>chef de projet digital depuis 2017</strong>, toujours en cours.</p><p><a class="lnk" href="https://www.afrolead.ci/" target="_blank" rel="noopener">afrolead.ci</a></p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>Intégrale Group &amp; Lune Groupe</h4><p>Abidjan. Infographiste freelance : supports de communication, identités visuelles, interfaces web pour des clients.</p><p class="cap">2018</p></div>
+    </div>
+
+    <div class="punch rv"><p>Une fondation, une ONG, une agence de l'ONU, une équipe médicale parisienne, un opérateur télécom. Le point commun : ils avaient un besoin, pas un cahier des charges.</p></div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="page a-magenta" id="p-stack">
+  <div class="ph">
+    <div><div class="pk rv">Outils</div><h2 class="rv">La <u>stack</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>✕</button>
+  </div>
+  <div class="bd">
+    <p class="lead rv" style="max-width:70ch;margin-bottom:clamp(12px,1.8vh,22px)">Ce que j'utilise réellement en production, pas une liste de mots-clés. <em>Chaque ligne correspond à un projet livré.</em></p>
+
+    <div class="stackrow rv"><div class="lb">Front</div><div class="vv"><b>React 19</b> · <b>Next.js 15</b> (App Router, RSC) · <b>TypeScript</b> · <b>Astro 5</b> · Tailwind CSS 4 · shadcn/ui · Radix · Vite</div></div>
+    <div class="stackrow rv"><div class="lb">Mobile</div><div class="vv"><b>React Native</b> · <b>Expo</b> (SDK 54) · Expo Router · PWA offline-first</div></div>
+    <div class="stackrow rv"><div class="lb">État &amp; données</div><div class="vv">Zustand · TanStack Query · Prisma 6 · <b>MongoDB</b> · Redis · Firebase (Auth &amp; Firestore)</div></div>
+    <div class="stackrow rv"><div class="lb">Back</div><div class="vv"><b>Node.js 22</b> · Express · <b>Socket.IO</b> · NextAuth v5 · BullMQ · API REST documentées</div></div>
+    <div class="stackrow rv"><div class="lb">Infra</div><div class="vv"><b>Docker</b> &amp; Docker Compose · nginx · MinIO · <b>Judge0</b> · Turborepo · Makefile d'orchestration · Netlify · GitHub Pages</div></div>
+    <div class="stackrow rv"><div class="lb">Qualité</div><div class="vv">Playwright (e2e) · ESLint · GlitchTip · OpenTelemetry · Umami</div></div>
+    <div class="stackrow rv"><div class="lb">Design</div><div class="vv"><b>Figma</b> · <b>Photoshop</b> · <b>Illustrator</b> · InDesign · Adobe XD · After Effects · Premiere Pro</div></div>
+    <div class="stackrow rv"><div class="lb">Animation web</div><div class="vv"><b>GSAP</b> · SVG · Canvas · Three.js</div></div>
+    <div class="stackrow rv"><div class="lb">En cours</div><div class="vv"><b>Cybersécurité &amp; cloud</b> · Master Epitech</div></div>
+
+    <div class="sect rv">Comment je choisis</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-target"/></svg></span><h4>La contrainte d'abord</h4><p>Homies n'a pas de bundler parce qu'il doit démarrer sur un téléphone d'entrée de gamme. Djai n'a pas de backend parce que les données financières ne doivent pas partir. La technologie découle du problème, jamais l'inverse.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-offline"/></svg></span><h4>Offline-first par défaut</h4><p>Ici, la connexion tombe. Une application qui suppose le réseau est une application qui ne marche pas la moitié du temps.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4>Une commande pour démarrer</h4><p>Si un nouveau développeur ne peut pas lancer le projet en cinq minutes, le projet est déjà en train de mourir. C'est un critère de conception, pas du confort.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4>WordPress n'est pas un gros mot</h4><p>J'ai commencé comme <strong>stagiaire développeur WordPress</strong> en 2019 et je n'ai jamais arrêté. Aujourd'hui encore, des plateformes que je livre tournent dessus, <strong>WooCommerce compris</strong>.</p><p>Pourquoi : quand un client doit publier lui-même, encaisser des paiements et gérer des abonnements dès le premier mois, un développement sur mesure lui coûte six mois et un prestataire à vie. Le bon outil, c'est celui qui rend le client autonome.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-shield"/></svg></span><h4>Ce que je ne fais pas</h4><p>Je ne mets pas une technologie sur un CV si je ne l'ai pas emmenée jusqu'en production. Cette liste est courte pour cette raison.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section class="page a-orange" id="p-parcours">
+  <div class="ph">
+    <div><div class="pk rv">D'où je viens</div><h2 class="rv">Le <u>parcours</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>✕</button>
+  </div>
+  <div class="bd">
+    <p class="lead rv" style="max-width:74ch;margin-bottom:clamp(12px,1.8vh,22px)">Je ne suis pas entré dans ce métier par la voie courte. C'est ce qui fait que je sais expliquer chaque étape à quelqu'un qui hésite.</p>
+
+    <div class="tl">
+      <div class="r rv"><div class="y">~ 7 ans</div><div class="c"><b>Des Pentium et Paint</b><span>Je dessine le drapeau de la Côte d'Ivoire sur les ordinateurs qui traînent à la maison. Je ne sais pas quel métier je veux. Je sais juste que je veux travailler avec des ordinateurs.</span></div></div>
+      <div class="r rv"><div class="y">2011 → 2012</div><div class="c"><b>Baccalauréat scientifique, série D</b><span>Lycée Moderne de Grand-Bassam, Côte d'Ivoire.</span></div></div>
+      <div class="r rv"><div class="y">2015 → 2016</div><div class="c"><b>BTS informatique, développeur d'application</b><span>Groupe LOKO, Marcory-Plateau. Première formation technique diplômante.</span></div></div>
+      <div class="r rv"><div class="y">2017 → 2018</div><div class="c"><b>Infographiste &amp; web designer</b><span>Afrolead (Grand-Bassam) puis Intégrale Group (Daloa). Je vis du visuel : identités, supports de communication, interfaces web.</span></div></div>
+      <div class="r rv"><div class="y">2019</div><div class="c"><b>Départ pour le Bénin, Epitech à 27 ans</b><span>Première promotion d'Epitech Bénin. J'étais le plus vieux de ma promo, de loin. Mes camarades de 18 ans et moi avons eu le même diplôme, la même année.</span></div></div>
+      <div class="r rv"><div class="y">2019 → 2020</div><div class="c"><b>Stagiaire développeur WordPress, Epitech Bénin</b><span>Ma première mission de développement : la refonte du site de l'école. C'est là que j'ai appris WordPress, que j'utilise encore aujourd'hui en production.</span></div></div>
+      <div class="r rv"><div class="y">2020 → 2022</div><div class="c"><b>UNICEF, Echopen, junior entreprise</b><span>Je travaille avant d'avoir mon diplôme : application mobile pour l'UNICEF, plateforme médicale parisienne à distance, projets clients.</span></div></div>
+      <div class="r rv"><div class="y">2021 → aujourd'hui</div><div class="c"><b>De l'autre côté du bureau</b><span>APE, puis responsable de promotion, puis responsable du Bachelor, et bientôt du Hub d'Innovation d'Abidjan.</span></div></div>
+      <div class="r rv"><div class="y">depuis 2022</div><div class="c"><b>Master cybersécurité &amp; cloud</b><span>Financé par mon entreprise et mené en parallèle de mon poste. Le Bachelor fait 3 ans, le cursus complet 5 : il me reste ces deux années à boucler.</span></div></div>
+    </div>
+
+    <div class="sect rv">Ce que j'en retiens</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-clock"/></svg></span><h4>Le retard n'existe pas</h4><p>J'ai commencé mon Bachelor à 27 ans, avec sept années entre le bac et la première année. Aucun employeur ne m'a jamais demandé mon âge d'entrée : on m'a demandé ce que je savais faire.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>Le design n'était pas une perte de temps</h4><p>Ces années d'infographie sont devenues mon avantage : je suis le seul dans la plupart des équipes à savoir dessiner l'écran <em>et</em> écrire ce qu'il y a derrière.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-bolt"/></svg></span><h4>Ce qui m'a fait tenir</h4><p>Une famille modeste, aucun plan B, et une phrase de mon père avant mon départ : «&nbsp;si jamais tu échoues, c'est fini, tu te débrouilles&nbsp;». Quand il n'y a pas de filet, on n'essaie pas, on fait.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4>Et le diplôme, alors ?</h4><p>Il ouvre des portes. Il ne dit pas qui on est. <strong>Ce qui me définit, c'est ce que je sais faire et ce que je construis pour les autres.</strong></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="page a-green" id="p-contact">
+  <div class="ph">
+    <div><div class="pk rv">Me joindre</div><h2 class="rv">Écrivez-<u>moi</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Je ne suis pas en recherche. Ce site existe pour <em>montrer ce que je fais</em>, et parce qu'un développeur qui demande à ses étudiants de se rendre visibles doit commencer par le faire lui-même.</p>
+        <p class="lead rv" style="margin-top:1em">Cela dit, j'aime discuter : d'un produit, d'une idée mal dégrossie, d'un choix d'architecture, de pédagogie. <em>Si l'un des projets d'ici vous parle, écrivez-moi.</em></p>
+        <div class="rv" style="margin-top:1.4em">
+          <a class="lnk" href="mailto:edwin1.kouassi@epitech.eu">edwin1.kouassi@epitech.eu</a>
+          <a class="lnk gh" href="mailto:franckedwin1@gmail.com">franckedwin1@gmail.com</a>
+          <a class="lnk gh" href="mailto:edwin@devpanl.dev">edwin@devpanl.dev</a>
+          <a class="lnk gh" href="https://github.com/edwinfranck" target="_blank" rel="noopener">github.com/edwinfranck</a>
+          <a class="lnk gh" href="https://www.behance.net/porpix24a0f2" target="_blank" rel="noopener">Behance</a>
+          <a class="lnk gh" href="assets/pdf/CV-Edwin-Kouassi.pdf" target="_blank" rel="noopener">Mon CV (PDF)</a>
+        </div>
+      </div>
+      <div>
+        <div class="kpis" style="grid-template-columns:1fr 1fr">
+          <div class="kpi rv"><b>10 ans</b><span>de design avant le code</span></div>
+          <div class="kpi rv"><b>7</b><span>produits conçus et développés</span></div>
+          <div class="kpi rv"><b>1 an</b><span>de travail 100 % à distance avec une équipe européenne</span></div>
+          <div class="kpi rv"><b>FR / EN</b><span>français langue maternelle, anglais B1</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sect rv">Ce dont j'aime parler</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-target"/></svg></span><h4>Les décisions, pas les technologies</h4><p>Pourquoi Djai n'a pas de serveur, pourquoi Homies n'a pas de bundler, pourquoi Entourage tourne sur WordPress. Le choix est toujours plus intéressant que l'outil.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4>Concevoir pour ici</h4><p>Mobile Money, connexions instables, téléphones d'entrée de gamme. La plupart des bonnes pratiques du web ont été écrites ailleurs, pour d'autres contraintes.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4>Former des ingénieurs</h4><p>Ce qui fait décrocher un étudiant, ce qui le fait tenir, et pourquoi les trois premiers mois décident du reste. C'est mon métier tous les jours.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>Le passage du design au code</h4><p>Ce que le design apporte à un développeur, et ce que le code apporte à un designer. J'ai fait les deux dans cet ordre, et je ne le referais pas autrement.</p></div>
+    </div>
+
+    <div class="punch rv"><p>Ce portfolio ne demande rien. Il montre.</p><small>&lt; edwin1.kouassi@epitech.eu /&gt;</small></div>
+  </div>
+</section>
+
+<script src="assets/js/gsap.min.js"></script>
+<script>
+(function(){
+'use strict';
+var ORDER = ['moi','faire','design','zeno','djai','devkora','entourage','solve','homies','lumio','epitech','clients','stack','parcours','contact'];
+var veil = document.getElementById('veil');
+var pgbar = document.getElementById('pgbar');
+var pgnum = document.getElementById('pgnum');
+var openId = null, animating = false, lastTile = null;
+var FX = window.gsap && !/[?&]static=1/.test(location.search);
+
+/* ── thème ── */
+var tbtn = document.getElementById('tbtn');
+function syncT(){ tbtn.textContent = document.body.classList.contains('light') ? '◐ Mode sombre' : '◐ Mode clair'; }
+function toggleTheme(){
+  var l = !document.body.classList.contains('light');
+  document.body.classList.toggle('light', l);
+  try{ localStorage.setItem('edwin-theme', l ? 'light' : 'dark'); }catch(e){}
+  var tc = document.querySelector('meta[name="theme-color"]');
+  if (tc) tc.setAttribute('content', l ? '#e9e9e6' : '#05060a');
+  syncT();
+}
+syncT();
+tbtn.addEventListener('click', toggleTheme);
+
+/* onglets mobiles : un groupe a la fois */
+var tabbar = document.getElementById('tabbar');
+var tabBtns = [].slice.call(tabbar.querySelectorAll('button'));
+function setTab(name, animate){
+  tabBtns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-tab') === name); });
+  var shown = [];
+  document.querySelectorAll('.t').forEach(function(t){
+    var on = t.getAttribute('data-grp') === name;
+    t.classList.toggle('tab-on', on);
+    if (on) shown.push(t);
+  });
+  try{ sessionStorage.setItem('edwin-tab', name); }catch(e){}
+  window.scrollTo({top:0, behavior: animate ? 'smooth' : 'auto'});
+  if (animate && FX && window.matchMedia('(max-width:820px)').matches){
+    gsap.fromTo(shown, {opacity:0, y:18}, {opacity:1, y:0, duration:.42, stagger:.05, ease:'power3.out', clearProps:'opacity,transform'});
+  }
+}
+tabBtns.forEach(function(b){
+  b.addEventListener('click', function(){ setTab(b.getAttribute('data-tab'), true); });
+});
+(function initTab(){
+  var t = null; try{ t = sessionStorage.getItem('edwin-tab'); }catch(e){}
+  setTab(t || 'accueil', false);
+})();
+
+/* PWA : service worker + invite d'installation */
+if ('serviceWorker' in navigator){
+  window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+}
+var instbtn = document.getElementById('instbtn'), deferredPrompt = null;
+instbtn.style.visibility = 'hidden';
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault(); deferredPrompt = e; instbtn.style.visibility = 'visible';
+});
+instbtn.addEventListener('click', function(){
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.finally(function(){ deferredPrompt = null; instbtn.style.visibility = 'hidden'; });
+});
+window.addEventListener('appinstalled', function(){ instbtn.style.visibility = 'hidden'; });
+
+/* decor */
+(function deco(){
+  var host = document.getElementById('deco'), frag = document.createDocumentFragment();
+  for (var i=0;i<14;i++){
+    var el = document.createElement('i');
+    var s = 60 + (i*37)%220;
+    el.style.width = s+'px'; el.style.height = ((i%3===0)? s*0.35 : s)+'px';
+    el.style.left = ((i*137)%100)+'%'; el.style.top = ((i*61)%100)+'%';
+    el.className = 'd' + (i%4);
+    frag.appendChild(el);
+  }
+  host.appendChild(frag);
+  if (!FX) return;
+  gsap.utils.toArray('#deco i').forEach(function(el,i){
+    gsap.to(el,{y:(i%2?-70:70),x:(i%3?40:-40),duration:18+i*1.7,repeat:-1,yoyo:true,ease:'sine.inOut',delay:i*.3});
+  });
+})();
+
+/* ── intro ── */
+if (FX){
+  gsap.set('.t',{opacity:0,y:26});
+  gsap.set('#top > *',{opacity:0,y:-10});
+  gsap.timeline({delay:.1})
+    .to('#top > *',{opacity:1,y:0,duration:.5,stagger:.06,ease:'power2.out'})
+    .to('.t',{opacity:1,y:0,duration:.72,stagger:{each:.05},ease:'power3.out'},'-=.25');
+  setTimeout(function(){
+    document.querySelectorAll('.t, #top > *').forEach(function(el){
+      if (parseFloat(getComputedStyle(el).opacity) < .95) el.style.cssText += ';opacity:1;transform:none';
+    });
+  },2600);
+}
+
+document.querySelectorAll('.t').forEach(function(t){
+  t.addEventListener('mouseenter',function(){ if(FX) gsap.to(t,{scale:1.012,duration:.35,ease:'power2.out'}); });
+  t.addEventListener('mouseleave',function(){ if(FX) gsap.to(t,{scale:1,duration:.45,ease:'power2.out'}); });
+  t.addEventListener('click',function(){ open(t.getAttribute('data-page'), t); });
+});
+
+function pageEl(id){ return document.getElementById('p-'+id); }
+function tileEl(id){ return document.getElementById('t-'+id); }
+
+function open(id, tile){
+  if (animating || openId === id) return;
+  if (openId){ swap(id); return; }
+  var page = pageEl(id); if (!page) return;
+  animating = true; openId = id; lastTile = tile || tileEl(id);
+  document.body.style.overflow = 'hidden';
+  var r = lastTile.getBoundingClientRect();
+  veil.classList.add('on'); page.classList.add('on');
+  page.querySelector('.bd').scrollTop = 0;
+  var pr = page.getBoundingClientRect();
+  pgnum.textContent = (ORDER.indexOf(id)+1) + ' / ' + ORDER.length;
+  if (!FX){ veil.style.opacity=1; animating=false; pgbar.style.visibility='visible'; pgbar.style.opacity=1; return; }
+  gsap.set(page,{transformOrigin:'0 0'});
+  gsap.to(veil,{opacity:1,duration:.35,ease:'power2.out'});
+  gsap.set(page.querySelectorAll('.rv'),{opacity:0,y:22});
+  gsap.fromTo(page,
+    {x:r.left-pr.left, y:r.top-pr.top, scaleX:r.width/pr.width, scaleY:r.height/pr.height, opacity:.35},
+    {x:0,y:0,scaleX:1,scaleY:1,opacity:1,duration:.62,ease:'expo.out',onComplete:function(){ animating=false; }});
+  gsap.to(page.querySelectorAll('.rv'),{opacity:1,y:0,duration:.5,stagger:.035,delay:.2,ease:'power3.out'});
+  gsap.to(pgbar,{opacity:1,duration:.3,delay:.45,onStart:function(){pgbar.style.visibility='visible';}});
+}
+
+function close(){
+  if (!openId || animating) return;
+  var page = pageEl(openId), tile = lastTile || tileEl(openId);
+  var r = tile.getBoundingClientRect(), pr = page.getBoundingClientRect();
+  animating = true;
+  if (!FX){ page.classList.remove('on'); veil.style.opacity=0; veil.classList.remove('on'); pgbar.style.visibility='hidden'; pgbar.style.opacity=0; openId=null; animating=false; document.body.style.overflow=''; return; }
+  gsap.to(pgbar,{opacity:0,duration:.2,onComplete:function(){pgbar.style.visibility='hidden';}});
+  gsap.to(page.querySelectorAll('.rv'),{opacity:0,y:-10,duration:.2,stagger:.008,ease:'power1.in'});
+  gsap.to(veil,{opacity:0,duration:.4,delay:.1,ease:'power2.in',onComplete:function(){veil.classList.remove('on');}});
+  gsap.set(page,{transformOrigin:'0 0'});
+  gsap.to(page,{x:r.left-pr.left, y:r.top-pr.top, scaleX:r.width/pr.width, scaleY:r.height/pr.height, opacity:0,
+    duration:.5, delay:.05, ease:'expo.inOut',
+    onComplete:function(){
+      page.classList.remove('on'); gsap.set(page,{clearProps:'all'});
+      document.body.style.overflow=''; openId=null; animating=false;
+      gsap.fromTo(tile,{scale:.985},{scale:1,duration:.4,ease:'power2.out'});
+    }});
+}
+
+function swap(id){
+  var from = pageEl(openId), to = pageEl(id);
+  if (!to || from === to || animating) return;
+  animating = true;
+  openId = id; lastTile = tileEl(id);
+  pgnum.textContent = (ORDER.indexOf(id)+1) + ' / ' + ORDER.length;
+  to.classList.add('on'); to.querySelector('.bd').scrollTop = 0;
+  if (!FX){ from.classList.remove('on'); animating=false; return; }
+  gsap.set(to.querySelectorAll('.rv'),{opacity:0,y:22});
+  gsap.fromTo(to,{opacity:0,x:36},{opacity:1,x:0,duration:.45,ease:'expo.out'});
+  gsap.to(to.querySelectorAll('.rv'),{opacity:1,y:0,duration:.45,stagger:.03,delay:.1,ease:'power3.out'});
+  gsap.to(from,{opacity:0,x:-30,duration:.3,ease:'power2.in',onComplete:function(){
+    from.classList.remove('on'); gsap.set(from,{clearProps:'all'}); animating=false;
+  }});
+}
+function step(d){
+  if (!openId) return;
+  var i = ORDER.indexOf(openId);
+  swap(ORDER[(i + d + ORDER.length) % ORDER.length]);
+}
+
+document.querySelectorAll('[data-x]').forEach(function(b){ b.addEventListener('click',close); });
+veil.addEventListener('click',close);
+pgbar.querySelectorAll('[data-nav]').forEach(function(b){
+  b.addEventListener('click',function(){ step(parseInt(b.getAttribute('data-nav'),10)); });
+});
+document.addEventListener('keydown',function(e){
+  if (e.key === 'l' || e.key === 'L'){ toggleTheme(); return; }
+  if (e.key === 'Escape'){ close(); return; }
+  if (!openId) return;
+  if (e.key === 'ArrowRight' || e.key === 'PageDown'){ e.preventDefault(); step(1); }
+  if (e.key === 'ArrowLeft'  || e.key === 'PageUp'  ){ e.preventDefault(); step(-1); }
+});
+window.addEventListener('resize',function(){ if (openId && FX) gsap.set(pageEl(openId),{clearProps:'transform'}); });
+
+/* lien direct : #zeno */
+function fromHash(){
+  var id = (location.hash || '').replace('#','');
+  if (ORDER.indexOf(id) < 0) return;
+  if (openId) swap(id); else if (FX) setTimeout(function(){ open(id, tileEl(id)); }, 300); else open(id, tileEl(id));
+}
+window.addEventListener('hashchange',fromHash);
+fromHash();
+})();
+</script>
+</body>
+</html>

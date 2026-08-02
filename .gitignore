@@ -1,0 +1,4 @@
+# sauvegardes locales
+.index.backup.html
+_*.html
+.DS_Store
