@@ -1,7 +1,7 @@
 /* Service worker du portfolio d'Edwin Kouassi.
    Stratégie : on sert depuis le cache si on l'a, on met à jour en arrière-plan.
    Bumper CACHE force le rafraîchissement de tous les visiteurs. */
-const CACHE = 'edwin-portfolio-v2';
+const CACHE = 'edwin-portfolio-v3';
 const CORE = ['./', './index.html', './manifest.webmanifest',
               './assets/css/fonts.css', './assets/js/gsap.min.js',
               './assets/img/edwin.jpg', './assets/img/icon-192.png'];

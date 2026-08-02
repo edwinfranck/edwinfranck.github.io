@@ -286,14 +286,11 @@ header#top{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);flex:0 0 a
   .blk h4{font-size:16px}.blk p,.blk li{font-size:14px}
   .kpi b{font-size:32px}.punch p{font-size:19px}
   .tl .r,.stackrow{grid-template-columns:1fr;gap:2px}
-  body.pgopen #tabbar{display:none}
-  #pgbar{top:auto;bottom:0;left:0;right:0;height:auto;
-    justify-content:space-between;gap:8px;background:var(--bg);
-    box-shadow:0 -1px 0 var(--i08);
-    padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px))}
-  #pgbar button{flex:0 0 auto;padding:10px 14px;font-size:12px}
-  #pgbar span{flex:0 0 auto}
-  .page > .bd{padding-bottom:104px}
+  /* la barre d'onglets reste la navigation principale, meme page ouverte */
+  #pgbar{display:none!important}
+  #tabbar{z-index:70}
+  .page{z-index:50}
+  .page > .bd{padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
 }
 </style>
 </head>
@@ -1303,7 +1300,10 @@ function setTab(name, animate){
   }
 }
 tabBtns.forEach(function(b){
-  b.addEventListener('click', function(){ setTab(b.getAttribute('data-tab'), true); });
+  b.addEventListener('click', function(){
+    if (window.__forceClose) window.__forceClose();   /* une page ouverte se referme */
+    setTab(b.getAttribute('data-tab'), true);
+  });
 });
 (function initTab(){
   var t = null; try{ t = sessionStorage.getItem('edwin-tab'); }catch(e){}
@@ -1379,6 +1379,8 @@ function open(id, tile){
   page.querySelector('.bd').scrollTop = 0;
   var pr = page.getBoundingClientRect();
   pgnum.textContent = (ORDER.indexOf(id)+1) + ' / ' + ORDER.length;
+  var grp = lastTile && lastTile.getAttribute('data-grp');
+  if (grp) setTab(grp, false);   /* l'onglet suit la carte ouverte */
   if (!FX){ veil.style.opacity=1; animating=false; pgbar.style.visibility='visible'; pgbar.style.opacity=1; return; }
   gsap.set(page,{transformOrigin:'0 0'});
   gsap.to(veil,{opacity:1,duration:.35,ease:'power2.out'});
@@ -1424,6 +1426,19 @@ function swap(id){
     from.classList.remove('on'); gsap.set(from,{clearProps:'all'}); animating=false;
   }});
 }
+/* fermeture instantanee : utilisee quand on tape un onglet page ouverte */
+function forceClose(){
+  if (!openId) return;
+  var page = pageEl(openId);
+  if (page){ page.classList.remove('on'); if (FX) gsap.set(page, {clearProps:'all'}); }
+  veil.classList.remove('on'); veil.style.opacity = 0;
+  pgbar.style.visibility = 'hidden'; pgbar.style.opacity = 0;
+  document.body.style.overflow = ''; document.body.classList.remove('pgopen');
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  openId = null; animating = false;
+}
+window.__forceClose = forceClose;
+
 function step(d){
   if (!openId) return;
   var i = ORDER.indexOf(openId);
