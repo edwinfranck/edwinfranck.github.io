@@ -29,7 +29,11 @@ Statique, sans build, sans dépendance externe : **HTML + CSS + un fichier GSAP 
 
 ## Mobile : application installable
 
-Sous 820 px de large, le site bascule en interface d'application : **en-tête fixe**, **barre d'onglets basse** (Accueil · Projets · Création · Parcours · Contact) et **un seul groupe de cartes affiché à la fois**, pour supprimer le défilement interminable.
+Sous 820 px de large, le site bascule en interface d'application : **en-tête fixe**, **barre d'onglets basse** (Accueil · Projets · Création · Parcours) et **un seul groupe de cartes affiché à la fois**, pour supprimer le défilement interminable.
+
+Les cartes sont sur **deux colonnes**. Quand un onglet en contient un nombre impair, la dernière prend toute la largeur, pour qu'aucune ligne ne reste à moitié vide. Le portrait s'étale toujours sur les deux colonnes et grandit pour occuper l'espace libre. C'est la fonction `setTab()` dans `index.html` qui pose la classe `wide`.
+
+Les placements de la grille de bureau sont enfermés dans `@media (min-width:821px)`, ce qui évite d'avoir à les annuler à coups de `!important` sur mobile.
 
 C'est une **PWA installable** : `manifest.webmanifest` (mode `standalone`, icônes 192/512 + maskable) et `sw.js` (stratégie *cache d'abord, mise à jour en arrière-plan*, donc le site fonctionne hors-ligne une fois visité). Un bouton **↓ Installer** apparaît dans l'en-tête quand le navigateur le propose.
 
