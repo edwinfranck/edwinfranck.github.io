@@ -1,17 +1,49 @@
 #!/usr/bin/env bash
 # Prévisualisation locale du portfolio, accessible depuis le téléphone.
 #
-#   ./serve.sh          port 8080 par défaut
-#   ./serve.sh 9000     autre port
+#   ./serve.sh          cherche un port libre à partir de 8080
+#   ./serve.sh 9000     commence la recherche à 9000
 #
 # Le téléphone doit être sur le même réseau Wi-Fi que cette machine.
-# Rien n'est publié : tout reste sur ta machine tant que tu n'as pas dit
-# de pousser.
+# Rien n'est publié : tout reste sur ta machine.
 
 set -e
-PORT="${1:-8080}"
+WANTED="${1:-8080}"
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 IP="$(hostname -I 2>/dev/null | awk '{print $1}')"
+
+# Cherche le premier port réellement libre à partir de celui demandé.
+PORT="$(python3 - "$WANTED" <<'PY'
+import socket, sys
+start = int(sys.argv[1])
+for p in range(start, start + 60):
+    s = socket.socket()
+    try:
+        s.bind(("0.0.0.0", p))
+        print(p)
+        break
+    except OSError:
+        pass
+    finally:
+        s.close()
+else:
+    print(0)
+PY
+)"
+
+if [ "$PORT" = "0" ]; then
+  echo
+  echo "  Aucun port libre entre $WANTED et $((WANTED + 59))."
+  echo "  Essaie : ./serve.sh 9500"
+  echo
+  exit 1
+fi
+
+if [ "$PORT" != "$WANTED" ]; then
+  BUSY="$(ss -ltnp 2>/dev/null | grep ":$WANTED " | grep -oP 'users:\(\("\K[^"]+' | head -1)"
+  echo
+  echo "  Le port $WANTED est déjà occupé${BUSY:+ par $BUSY}, je prends le $PORT."
+fi
 
 cd "$DIR"
 
@@ -27,9 +59,9 @@ fi
 echo
 echo "  Ctrl+C pour arrêter."
 echo
-echo "  Note : le service worker met en cache. Si tu ne vois pas tes"
-echo "  changements, recharge en vidant le cache, ou ouvre l'adresse"
-echo "  avec ?nocache=1 puis recharge."
+echo "  Si le téléphone montre une vieille version, c'est le service worker."
+echo "  Ouvre l'adresse avec ?v=2 (n'importe quel numéro qui change), ou"
+echo "  dans Chrome : menu ⋮ > Historique > Effacer les données de navigation."
 echo
 
 exec python3 -m http.server "$PORT" --bind 0.0.0.0
