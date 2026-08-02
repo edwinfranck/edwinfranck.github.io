@@ -286,7 +286,14 @@ header#top{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);flex:0 0 a
   .blk h4{font-size:16px}.blk p,.blk li{font-size:14px}
   .kpi b{font-size:32px}.punch p{font-size:19px}
   .tl .r,.stackrow{grid-template-columns:1fr;gap:2px}
-  #pgbar{top:20px;right:70px;height:40px}
+  body.pgopen #tabbar{display:none}
+  #pgbar{top:auto;bottom:0;left:0;right:0;height:auto;
+    justify-content:space-between;gap:8px;background:var(--bg);
+    box-shadow:0 -1px 0 var(--i08);
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px))}
+  #pgbar button{flex:0 0 auto;padding:10px 14px;font-size:12px}
+  #pgbar span{flex:0 0 auto}
+  .page > .bd{padding-bottom:104px}
 }
 </style>
 </head>
@@ -1366,6 +1373,7 @@ function open(id, tile){
   var page = pageEl(id); if (!page) return;
   animating = true; openId = id; lastTile = tile || tileEl(id);
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('pgopen');
   var r = lastTile.getBoundingClientRect();
   veil.classList.add('on'); page.classList.add('on');
   page.querySelector('.bd').scrollTop = 0;
@@ -1387,7 +1395,7 @@ function close(){
   var page = pageEl(openId), tile = lastTile || tileEl(openId);
   var r = tile.getBoundingClientRect(), pr = page.getBoundingClientRect();
   animating = true;
-  if (!FX){ page.classList.remove('on'); veil.style.opacity=0; veil.classList.remove('on'); pgbar.style.visibility='hidden'; pgbar.style.opacity=0; openId=null; animating=false; document.body.style.overflow=''; return; }
+  if (!FX){ page.classList.remove('on'); veil.style.opacity=0; veil.classList.remove('on'); pgbar.style.visibility='hidden'; pgbar.style.opacity=0; openId=null; animating=false; document.body.style.overflow=''; document.body.classList.remove('pgopen'); return; }
   gsap.to(pgbar,{opacity:0,duration:.2,onComplete:function(){pgbar.style.visibility='hidden';}});
   gsap.to(page.querySelectorAll('.rv'),{opacity:0,y:-10,duration:.2,stagger:.008,ease:'power1.in'});
   gsap.to(veil,{opacity:0,duration:.4,delay:.1,ease:'power2.in',onComplete:function(){veil.classList.remove('on');}});
@@ -1396,7 +1404,7 @@ function close(){
     duration:.5, delay:.05, ease:'expo.inOut',
     onComplete:function(){
       page.classList.remove('on'); gsap.set(page,{clearProps:'all'});
-      document.body.style.overflow=''; openId=null; animating=false;
+      document.body.style.overflow=''; document.body.classList.remove('pgopen'); openId=null; animating=false;
       gsap.fromTo(tile,{scale:.985},{scale:1,duration:.4,ease:'power2.out'});
     }});
 }
