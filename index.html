@@ -295,10 +295,11 @@ header#top{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);flex:0 0 a
 </style>
 </head>
 <body>
-<script>/* thème avant le premier rendu */(function(){
+<script>/* theme avant le premier rendu : URL > choix memorise > reglage du systeme */(function(){
   var q=/[?&]theme=(light|dark)/.exec(location.search), sv=null;
   try{ sv=localStorage.getItem('edwin-theme'); }catch(e){}
-  if ((q ? q[1] : (sv || 'dark')) === 'light') document.body.classList.add('light');
+  var sys = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  if ((q ? q[1] : (sv || sys)) === 'light') document.body.classList.add('light');
 })();</script>
 
 
@@ -1281,6 +1282,20 @@ function toggleTheme(){
 }
 syncT();
 tbtn.addEventListener('click', toggleTheme);
+
+/* si Edwin n'a jamais touche au bouton, on suit le reglage du telephone en direct */
+if (window.matchMedia){
+  var mq = window.matchMedia('(prefers-color-scheme: light)');
+  var onSys = function(e){
+    var chosen = null; try{ chosen = localStorage.getItem('edwin-theme'); }catch(x){}
+    if (chosen) return;
+    document.body.classList.toggle('light', e.matches);
+    var tc = document.querySelector('meta[name="theme-color"]');
+    if (tc) tc.setAttribute('content', e.matches ? '#e9e9e6' : '#05060a');
+    syncT();
+  };
+  if (mq.addEventListener) mq.addEventListener('change', onSys); else if (mq.addListener) mq.addListener(onSys);
+}
 
 /* onglets mobiles : un groupe a la fois */
 var tabbar = document.getElementById('tabbar');
