@@ -18,7 +18,9 @@ Statique, sans build, sans dépendance externe : **HTML + CSS + un fichier GSAP 
 | Djai | app mobile Mobile Money, 100 % locale |
 | Devkora | SaaS multi-tenant d'évaluation de code |
 | Entourage Africa | plateforme d'experts africains — +100 experts, 35 pays (client) |
-| Solve | plateforme communautaire de développeurs — 54 tests, Supabase |
+| Solve | plateforme communautaire de développeurs, 54 tests, Supabase (en dev) |
+| CV Vitae | copilote carrière, score ATS en direct, gratuit |
+| GhostNet | plateforme CTF, 100 anomalies, 4 familles (en dev) |
 | Homies | party game multijoueur temps réel |
 | Lumio | SaaS PWA paroissial + Mobile Money |
 | Epitech | étudiant → responsable du Bachelor → Hub d'Innovation |
@@ -89,6 +91,12 @@ portfolio/
         ├── entourage.webp      annuaire d'experts Entourage (mockup MacBook)
         ├── homies-mobile.webp  Homies sur mobile (mockup Galaxy)
         ├── djai.jpg            page de présentation de l'application
+        ├── cvvitae.webp        CV Vitae (mockup MacBook)
+        ├── ghostnet.webp       GhostNet (mockup MacBook)
+        ├── homiesui.webp       Homies UI (mockup MacBook)
+        ├── lumio.webp          Lumio (mockup MacBook)
+        ├── nova.webp           Opération Kernel, JPO (mockup MacBook)
+        ├── statut-carre.jpg    visuel carré pour WhatsApp / LinkedIn
         └── design/*.webp       15 créations graphiques
 ```
 
@@ -98,7 +106,6 @@ Poids total : ~2,6 Mo (dont 860 Ko de créations graphiques et 290 Ko de CV). Au
 
 Les captures manquantes — c'est ce qui renforcera le plus le site :
 
-- [ ] **Lumio** — un écran de don Mobile Money (seul projet encore sans capture)
 - [ ] **ADCVI** — le site est en ligne sur adcvi.ci mais son contenu se charge au défilement : la capture automatique revient vide. Une capture manuelle ferait l'affaire.
 - [ ] **Zeno** — une vue de l'application connectée (aujourd'hui c'est la page publique)
 

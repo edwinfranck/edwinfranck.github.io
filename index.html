@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Edwin Kouassi · Designer, développeur, pédagogue</title>
-<meta name="description" content="Je dessine, je code, je livre, et je forme ceux qui prendront la suite. Produits web et mobile, plateformes en production, pédagogie. Abidjan.">
+<meta name="description" content="Je conçois, je code, je livre, et je forme ceux qui prendront la suite. Produits web et mobile, plateformes en production, pédagogie. Abidjan.">
 <meta name="author" content="Edwin Franck B. Kouassi">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Edwin Kouassi · Designer, développeur, pédagogue">
-<meta property="og:description" content="Je dessine, je code, je livre, et je forme ceux qui prendront la suite. Abidjan.">
+<meta property="og:description" content="Je conçois, je code, je livre, et je forme ceux qui prendront la suite. Abidjan.">
 <meta property="og:image" content="assets/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ff5f3a'/></svg>">
@@ -30,7 +30,7 @@
   --i85:hsla(0,0%,100%,.90); --i62:hsla(0,0%,100%,.62); --i38:hsla(0,0%,100%,.40);
   --i16:hsla(0,0%,100%,.16); --i08:hsla(0,0%,100%,.07);
   --veil:hsla(225,45%,4%,.82);
-  --fade0:hsla(225,33%,3%,0); --fade1:hsla(225,33%,3%,.5);
+  --fade0:hsla(225,33%,3%,0); --fade1:hsla(225,33%,3%,.5); --fade-end:var(--tile);
   --deco-op:.05; --grain-op:.035;
   --c-blue:#3a63ff;    --c-blue-ink:#fff;      --t-blue:#3a63ff;
   --c-green:#00ff97;   --c-green-ink:#05060a;  --t-green:#00ff97;
@@ -45,7 +45,7 @@ body.light{
   --i85:hsla(228,24%,6%,.88); --i62:hsla(228,24%,6%,.68); --i38:hsla(228,24%,6%,.48);
   --i16:hsla(228,24%,6%,.18); --i08:hsla(228,24%,6%,.08);
   --veil:hsla(225,20%,8%,.46);
-  --fade0:hsla(0,0%,100%,0); --fade1:hsla(0,0%,100%,.55);
+  --fade0:hsla(0,0%,100%,0); --fade1:hsla(0,0%,100%,.55); --fade-end:var(--tile);
   --deco-op:.10; --grain-op:0;
   --c-blue:#013afb;    --c-blue-ink:#fff;      --t-blue:#013afb;
   --c-green:#00e08a;   --c-green-ink:#05060a;  --t-green:#008054;
@@ -82,7 +82,7 @@ header#top{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);flex:0 0 a
 #top .hint{font-family:'IBM Plex Mono',monospace;font-size:clamp(8.5px,1.05vh,11px);color:var(--i38);letter-spacing:.05em;text-transform:uppercase}
 
 #stage{flex:1 1 auto;min-height:0}
-.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(7,1fr);gap:var(--gap);height:100%}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(9,1fr);gap:var(--gap);height:100%}
 
 /* ───────────────────────── TUILES ───────────────────────── */
 .t{position:relative;background:var(--tile);overflow:hidden;cursor:pointer;
@@ -97,12 +97,13 @@ header#top{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);flex:0 0 a
 .t .h{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(15px,2.5vh,30px);line-height:.94}
 .t .h u{text-decoration:none;color:var(--ac-t)}
 .t .s{font-size:clamp(10.5px,1.35vh,14px);color:var(--i62);line-height:1.35;max-width:54ch}
-.t .plus{position:absolute;bottom:clamp(10px,1.3vh,16px);right:clamp(12px,1.1vw,18px);font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--i38);opacity:0;transition:opacity .25s}
-.t:hover .plus{opacity:1}
+.t .plus{position:absolute;bottom:clamp(9px,1.2vh,15px);right:clamp(11px,1vw,16px);font-family:'IBM Plex Mono',monospace;font-size:15px;line-height:1;color:var(--ac-t);opacity:0;transition:opacity .25s,transform .25s;transform:translateX(-4px)}
+.t:hover .plus{opacity:1;transform:translateX(0)}
 .t .viz{flex:1 1 auto;min-height:0;display:flex;align-items:center;justify-content:flex-start;
   padding:2px clamp(28px,3vw,44px) clamp(6px,1vh,14px) 0;overflow:hidden;pointer-events:none;opacity:.95}
+.t .viz{max-height:clamp(64px,11vh,124px)}
 .t .viz svg{display:block;width:100%;height:100%;max-height:100%;overflow:visible}
-.tags{display:flex;flex-wrap:wrap;gap:4px;flex:0 0 auto;margin-top:2px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;flex:0 0 auto;margin-top:2px;padding-right:22px}
 .tags b{font-family:'IBM Plex Mono',monospace;font-weight:400;font-size:clamp(8px,1vh,10.5px);letter-spacing:.05em;padding:3px 6px;background:var(--i08);color:var(--i62)}
 
 /* placement */
@@ -118,18 +119,21 @@ header#top{display:flex;align-items:center;gap:clamp(10px,1.8vw,26px);flex:0 0 a
   #t-homies{grid-column:4/6;grid-row:4/6}
   #t-entourage{grid-column:6/10;grid-row:5/7}
   #t-solve{grid-column:10/13;grid-row:5/7}
-  #t-epitech{grid-column:1/4;grid-row:6/8}
-  #t-stack{grid-column:4/6;grid-row:6/7}
-  #t-parcours{grid-column:4/6;grid-row:7/8}
-  #t-lumio{grid-column:6/9;grid-row:7/8}
-  #t-clients{grid-column:9/13;grid-row:7/8}
+  #t-cvvitae{grid-column:1/4;grid-row:6/8}
+  #t-ghostnet{grid-column:4/6;grid-row:6/8}
+  #t-lumio{grid-column:6/10;grid-row:7/10}
+  #t-clients{grid-column:10/13;grid-row:7/10}
+  #t-epitech{grid-column:1/4;grid-row:8/10}
+  #t-stack{grid-column:4/6;grid-row:8/9}
+  #t-parcours{grid-column:4/6;grid-row:9/10}
 }
 
 /* héro */
 .hero{position:relative;height:100%;display:grid;grid-template-rows:1fr auto}
 .hero .ph{position:relative;overflow:hidden;min-height:0}
 .hero .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.06);display:block}
-.hero .ph::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,var(--fade0) 34%,var(--fade1) 64%,var(--tile) 100%)}
+.hero .ph::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,
+  var(--fade0) 22%,var(--fade1) 62%,var(--fade-end) 92%,var(--fade-end) 100%)}
 .hero .ph .flag{position:absolute;top:0;left:0;display:flex;height:clamp(5px,.7vh,8px);width:clamp(56px,7vw,96px)}
 .hero .ph .flag span{flex:1}
 .hero .id{position:relative;padding:0 clamp(13px,1.2vw,22px) clamp(12px,1.5vh,20px)}
@@ -289,6 +293,8 @@ body.splash-on #splash{display:block}
   .t.wide{grid-column:1/-1}
   /* les cartes de texte prennent la largeur, les projets se mettent par deux */
 
+  #t-moi{--fade-end:var(--tile-hi)}
+  body.light #t-moi{--fade-end:var(--tile)}
   .t{min-height:0;padding:13px 14px 14px;gap:5px;background:var(--tile-hi);
     justify-content:flex-start;overflow:hidden;position:relative}
   .t .sq{width:18px;height:18px}
@@ -421,11 +427,11 @@ body.splash-on #splash{display:block}
           </div>
           <div class="id">
             <div class="nm"><small>Edwin Franck B.</small>Kouassi</div>
-            <div class="th">Je dessine, je code, je livre, et je forme ceux qui prendront la suite.</div>
+            <div class="th">Je conçois, je code, je livre, et je forme ceux qui prendront la suite.</div>
             <div class="ro">Designer devenu développeur, aujourd'hui responsable pédagogique et builder de produits. Basé à Abidjan.</div>
           </div>
         </div>
-        <span class="plus mono">→ qui je suis</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- CE QUE JE FAIS -->
@@ -445,7 +451,7 @@ body.splash-on #splash{display:block}
         <div class="k">Ce que je fais</div>
         <div class="h">Quatre métiers, <u>une seule chaîne</u></div>
         <div class="s">Je conçois l'interface, j'écris le code, je déploie l'infrastructure, et j'enseigne les trois.</div>
-        <span class="plus mono">→ ouvrir</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- CONTACT -->
@@ -463,7 +469,7 @@ body.splash-on #splash{display:block}
         <div class="k">Me joindre</div>
         <div class="h">Écrivez-<u>moi</u></div>
         <div class="s">Une question, une idée, une envie de discuter d'un projet ou de pédagogie. CV, Behance et GitHub à l'intérieur.</div>
-        <span class="plus mono">→ ouvrir</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- ZENO -->
@@ -486,7 +492,7 @@ body.splash-on #splash{display:block}
         <div class="h">Zeno</div>
         <div class="s">« Arrêtez de bricoler, gérez votre campus. » 12 outils remplacés par une seule plateforme, sur deux campus en production.</div>
         <div class="tags"><b>530+ utilisateurs</b><b>2 campus</b><b>React 19</b><b>Node 22</b><b>Docker</b></div>
-        <span class="plus mono">→ étude de cas</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- DJAI -->
@@ -509,7 +515,7 @@ body.splash-on #splash{display:block}
         <div class="h">Djai</div>
         <div class="s">Lit les SMS MTN, Moov et bancaires, et construit le budget tout seul. Rien ne quitte le téléphone.</div>
         <div class="tags"><b>Play Store</b><b>React Native</b><b>Expo</b><b>Offline</b></div>
-        <span class="plus mono">→ étude de cas</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- DEVKORA -->
@@ -527,11 +533,11 @@ body.splash-on #splash{display:block}
             <rect x="32" y="64" width="9" height="9" fill="var(--i16)"/>
           </svg>
         </div>
-        <div class="k">SaaS multi-tenant</div>
+        <div class="k">SaaS multi-tenant · en développement</div>
         <div class="h">Devkora</div>
         <div class="s">Évaluation technique : vrai éditeur, exécution en sandbox, critères validés en direct.</div>
-        <div class="tags"><b>Next.js 15</b><b>Judge0</b><b>Prisma</b></div>
-        <span class="plus mono">→ étude de cas</span>
+        <div class="tags"><b>En développement</b><b>Next.js 15</b><b>Judge0</b><b>Prisma</b></div>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- LUMIO -->
@@ -554,7 +560,7 @@ body.splash-on #splash{display:block}
         <div class="h">Lumio</div>
         <div class="s">Digitaliser la vie paroissiale en Afrique francophone : dons et services par Mobile Money.</div>
         <div class="tags"><b>En développement</b><b>PWA</b><b>Mobile Money</b></div>
-        <span class="plus mono">→ étude de cas</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- HOMIES -->
@@ -573,8 +579,8 @@ body.splash-on #splash{display:block}
         <div class="k">Multijoueur temps réel</div>
         <div class="h">Homies</div>
         <div class="s">Une partie sur la télé, chacun joue depuis son téléphone. 25 modes, 9 règles.</div>
-        <div class="tags"><b>Socket.IO</b><b>PWA</b><b>363 commits</b></div>
-        <span class="plus mono">→ étude de cas</span>
+        <div class="tags"><b>Socket.IO</b><b>PWA</b><b>+ Homies UI</b></div>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- SOLVE -->
@@ -594,11 +600,11 @@ body.splash-on #splash{display:block}
             </g>
           </svg>
         </div>
-        <div class="k">Plateforme communautaire</div>
+        <div class="k">Plateforme communautaire · en développement</div>
         <div class="h">Solve</div>
         <div class="s">Les développeurs y publient leurs projets, participent à des challenges et co-construisent des idées.</div>
-        <div class="tags"><b>Next.js 16</b><b>Supabase</b><b>Express 5</b><b>54 tests</b></div>
-        <span class="plus mono">→ étude de cas</span>
+        <div class="tags"><b>En développement</b><b>Next.js 16</b><b>Supabase</b><b>54 tests</b></div>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- DESIGN -->
@@ -619,7 +625,7 @@ body.splash-on #splash{display:block}
         <div class="h">Le <u>design</u></div>
         <div class="s">Dix ans d'infographie et de direction artistique. Affiches, identités, packaging, campagnes.</div>
         <div class="tags"><b>15 visuels</b><b>Behance</b><b>Suite Adobe</b></div>
-        <span class="plus mono">→ voir les créations</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- ENTOURAGE -->
@@ -642,7 +648,51 @@ body.splash-on #splash{display:block}
         <div class="h">Entourage <u>Africa</u></div>
         <div class="s">Se connecter aux meilleurs experts d'Afrique en appel vidéo privé. +100 experts, 30 secteurs, 35 pays.</div>
         <div class="tags"><b>entourage.africa</b><b>WordPress</b><b>WooCommerce</b><b>FR / EN</b></div>
-        <span class="plus mono">→ étude de cas</span>
+        <span class="plus mono" aria-hidden="true">→</span>
+      </article>
+
+      <!-- CV VITAE -->
+      <article class="t a-orange" id="t-cvvitae" data-page="cvvitae" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 240 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="6" width="104" height="70" fill="var(--i08)"/>
+            <rect x="8" y="14" width="46" height="6" fill="var(--c-orange)"/>
+            <rect x="8" y="26" width="80" height="4" fill="var(--i16)"/><rect x="8" y="35" width="66" height="4" fill="var(--i16)"/>
+            <rect x="8" y="44" width="74" height="4" fill="var(--i16)"/><rect x="8" y="53" width="52" height="4" fill="var(--i16)"/>
+            <circle cx="152" cy="38" r="26" fill="none" stroke="var(--i16)" stroke-width="7"/>
+            <path d="M152 12a26 26 0 0 1 20 42" fill="none" stroke="var(--c-orange)" stroke-width="7"/>
+            <text x="138" y="43" font-family="Anton" font-size="20" fill="var(--ink)">86</text>
+            <text x="192" y="34" font-family="IBM Plex Mono" font-size="8" fill="var(--i38)">SCORE</text>
+            <text x="192" y="46" font-family="IBM Plex Mono" font-size="8" fill="var(--i38)">ATS</text>
+            <text x="0" y="90" font-family="IBM Plex Mono" font-size="7.5" fill="var(--i38)">GRATUIT · SANS INSCRIPTION</text>
+          </svg>
+        </div>
+        <div class="k">Outil carrière</div>
+        <div class="h">CV <u>Vitae</u></div>
+        <div class="s">Le copilote carrière de l'Afrique francophone : un CV aux standards internationaux, en français.</div>
+        <div class="tags"><b>cv-vitae.vercel.app</b><b>Compatible ATS</b><b>Gratuit</b></div>
+        <span class="plus mono" aria-hidden="true">→</span>
+      </article>
+
+      <!-- GHOSTNET -->
+      <article class="t a-green" id="t-ghostnet" data-page="ghostnet" data-grp="projets">
+        <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 120 96" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <rect x="0" y="8" width="120" height="60" fill="var(--i08)"/>
+            <text x="8" y="26" font-family="IBM Plex Mono" font-size="7.5" fill="var(--i38)">// DOSSIER 4783-K</text>
+            <rect x="8" y="34" width="40" height="7" fill="var(--c-green)"/>
+            <rect x="8" y="46" width="66" height="4" fill="var(--i16)"/>
+            <rect x="8" y="55" width="52" height="4" fill="var(--i16)"/>
+            <text x="0" y="86" font-family="IBM Plex Mono" font-size="7.5" fill="var(--i38)">100 ANOMALIES À TROUVER</text>
+          </svg>
+        </div>
+        <div class="k">Plateforme CTF · en développement</div>
+        <div class="h">Ghost<u>Net</u></div>
+        <div class="s">Cent anomalies cachées à débusquer : web, crypto, stéganographie, rétro-ingénierie.</div>
+        <div class="tags"><b>En développement</b><b>Cybersécurité</b><b>CTF</b></div>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- EPITECH -->
@@ -663,16 +713,26 @@ body.splash-on #splash{display:block}
         <div class="k">Epitech · 2019 → aujourd'hui</div>
         <div class="h">Étudiant, puis <u>responsable</u></div>
         <div class="s">Responsable du Bachelor, bientôt du Hub d'Innovation. Et je construis les outils de mon propre métier : Suivis, epitech-tracker, Bulletins Insight, FORGE.</div>
-        <span class="plus mono">→ ouvrir</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- CLIENTS -->
       <article class="t a-orange" id="t-clients" data-page="clients" data-grp="creation">
         <span class="sq"></span>
+        <div class="viz">
+          <svg viewBox="0 0 260 92" preserveAspectRatio="xMinYMid meet" aria-hidden="true">
+            <g font-family="IBM Plex Mono" font-size="8.5" fill="var(--i62)">
+              <rect x="0" y="6" width="10" height="10" fill="var(--c-orange)"/><text x="20" y="15">ENTOURAGE AFRICA</text>
+              <rect x="0" y="27" width="10" height="10" fill="var(--c-orange)" opacity=".78"/><text x="20" y="36">UNICEF BÉNIN</text>
+              <rect x="0" y="48" width="10" height="10" fill="var(--c-orange)" opacity=".56"/><text x="20" y="57">ECHOPEN, PARIS</text>
+              <rect x="0" y="69" width="10" height="10" fill="var(--c-orange)" opacity=".34"/><text x="20" y="78">ADCVI · AFROLEAD · MTN</text>
+            </g>
+          </svg>
+        </div>
         <div class="k">Ils m'ont fait confiance</div>
         <div class="h">Clients &amp; <u>institutions</u></div>
         <div class="s">Entourage Africa · UNICEF Bénin · Echopen (Paris) · ADCVI · Afrolead · MTN Bénin · Lune Groupe · ministères.</div>
-        <span class="plus mono">→ ouvrir</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- STACK -->
@@ -681,7 +741,7 @@ body.splash-on #splash{display:block}
         <div class="k">Outils</div>
         <div class="h">La <u>stack</u></div>
         <div class="s">React · Next · Node · React Native · Docker · MongoDB · Figma · la suite Adobe.</div>
-        <span class="plus mono">→ ouvrir</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
       <!-- PARCOURS -->
@@ -690,7 +750,7 @@ body.splash-on #splash{display:block}
         <div class="k">D'où je viens</div>
         <div class="h">Le <u>parcours</u></div>
         <div class="s">Paint à 7 ans, Epitech à 27, responsable à 30.</div>
-        <span class="plus mono">→ ouvrir</span>
+        <span class="plus mono" aria-hidden="true">→</span>
       </article>
 
     </div>
@@ -705,7 +765,7 @@ body.splash-on #splash{display:block}
 </nav>
 
 <div id="veil"></div>
-<div id="pgbar"><button data-nav="-1">← précédent</button><span id="pgnum">1 / 15</span><button data-nav="1">suivant →</button></div>
+<div id="pgbar"><button data-nav="-1">← précédent</button><span id="pgnum">1 / 17</span><button data-nav="1">suivant →</button></div>
 
 <!-- ═══════════════════════ PAGES ═══════════════════════ -->
 
@@ -776,7 +836,7 @@ body.splash-on #splash{display:block}
     </div>
 
     <div class="blocks c4">
-      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4><u>1</u> Design</h4><p>Dix ans avant le code : identité, affiche, maquette, motion. <strong>Photoshop, Illustrator, InDesign, After Effects, Premiere Pro, XD, Figma.</strong></p><p>Concrètement : je dessine les interfaces que je développe, et je sais défendre une direction artistique devant un client. <strong>Les créations sont dans la carte «&nbsp;Le design&nbsp;».</strong></p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4><u>1</u> Design</h4><p>Dix ans avant le code : identité, affiche, maquette, motion. <strong>Photoshop, Illustrator, InDesign, After Effects, Premiere Pro, XD, Figma.</strong></p><p>Concrètement : j'ai dessiné assez d'interfaces pour savoir à quoi doit ressembler celle que je développe, et je sais défendre une direction artistique devant un client. <strong>Les créations sont dans la carte «&nbsp;Le design&nbsp;».</strong></p></div>
       <div class="blk rv"><span class="ico"><svg><use href="#i-code"/></svg></span><h4><u>2</u> Développement</h4><p>Sur mesure (<strong>React 19, Next.js 15, TypeScript, Astro</strong>), mobile (<strong>React Native, Expo</strong>), temps réel (<strong>Socket.IO</strong>), et <strong>WordPress / WooCommerce</strong> quand c'est le bon outil.</p><p>Concrètement : Zeno, Devkora, Solve, Djai, Homies, Entourage : des produits complets en ligne, pas des démos.</p></div>
       <div class="blk rv"><span class="ico"><svg><use href="#i-box"/></svg></span><h4><u>3</u> Architecture &amp; infra</h4><p><strong>Docker, monorepos, files d'attente, sandboxing, observabilité, CI.</strong> Master <strong>cybersécurité &amp; cloud</strong> en cours.</p><p>Concrètement : Zeno se lance en une commande : ports libres détectés, secrets générés, stack santé vérifiée. Devkora exécute du code inconnu dans un sandbox isolé du réseau.</p></div>
       <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4><u>4</u> Pédagogie</h4><p>Responsable du Bachelor Epitech, accompagnateur pédagogique, bientôt responsable du <strong>Hub d'Innovation</strong>.</p><p>Concrètement : je conçois aussi les outils que la pédagogie utilise : détection du décrochage, suivi d'activité, évaluation technique, expériences immersives.</p></div>
@@ -803,7 +863,6 @@ body.splash-on #splash{display:block}
       <div>
         <p class="lead rv">Une école, c'est des admissions, de la pédagogie, des présences, des notes, des factures, des événements et du suivi carrière. Dans la vraie vie, c'est <em>dix fichiers Excel qui ne se parlent pas</em> et trois personnes qui les recopient.</p>
         <p class="lead rv" style="margin-top:1em">Zeno remplace tout ça par <em>une seule plateforme</em> : <em>12 outils et 12 identifiants</em> devenus un seul. Elle tourne aujourd'hui sur <em>deux campus en production</em>, pour plus de 530 utilisateurs actifs.</p>
-        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://zeno.epitools.bj" target="_blank" rel="noopener">Voir la plateforme</a></div>
       </div>
       <div class="shot rv"><img src="assets/img/zeno.jpg" alt="Zeno, page d'accueil"></div>
     </div>
@@ -883,7 +942,7 @@ body.splash-on #splash{display:block}
 <!-- DEVKORA -->
 <section class="page a-blue" id="p-devkora">
   <div class="ph">
-    <div><div class="pk rv">SaaS multi-tenant · évaluation de code</div><h2 class="rv">Devkora</h2></div>
+    <div><div class="pk rv">SaaS multi-tenant · évaluation de code · en développement</div><h2 class="rv">Devkora</h2></div>
     <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
   </div>
   <div class="bd">
@@ -932,8 +991,8 @@ body.splash-on #splash{display:block}
   <div class="bd">
     <div class="split wide">
       <div>
-        <p class="lead rv">J'ai gagné ma vie avec <em>Photoshop et Illustrator</em> avant d'en gagner une ligne avec du code. Affiches d'événements, identités de marque, packaging, campagnes de recrutement, menus, réseaux sociaux : c'est le métier que j'exerçais à Abidjan, et celui que je continue d'exercer chez Afrolead.</p>
-        <p class="lead rv" style="margin-top:1em">Ce n'est pas une ligne décorative sur un CV de développeur. <em>C'est ce qui fait que je dessine les interfaces que je code.</em></p>
+        <p class="lead rv">J'ai gagné ma vie avec <em>Photoshop et Illustrator</em> avant d'en gagner une ligne avec du code. Affiches d'événements, identités de marque, packaging, campagnes de recrutement, menus, réseaux sociaux : c'est le métier que j'exerçais à Abidjan. Je ne dessine plus au quotidien : chez Afrolead je pilote aujourd'hui les projets digitaux.</p>
+        <p class="lead rv" style="margin-top:1em">Ce n'est pas une ligne décorative sur un CV de développeur. <em>C'est ce qui fait que je sais à quoi doit ressembler l'interface que je code.</em></p>
         <div class="rv" style="margin-top:1.2em">
           <a class="lnk" href="https://www.behance.net/porpix24a0f2" target="_blank" rel="noopener">Mon Behance</a>
           <a class="lnk gh" href="https://www.afrolead.ci/" target="_blank" rel="noopener">Afrolead</a>
@@ -1038,7 +1097,7 @@ body.splash-on #splash{display:block}
 <!-- SOLVE -->
 <section class="page a-blue" id="p-solve">
   <div class="ph">
-    <div><div class="pk rv">Plateforme communautaire · web</div><h2 class="rv">Solve</h2></div>
+    <div><div class="pk rv">Plateforme communautaire · en développement</div><h2 class="rv">Solve</h2></div>
     <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
   </div>
   <div class="bd">
@@ -1046,7 +1105,6 @@ body.splash-on #splash{display:block}
       <div>
         <p class="lead rv">Un développeur qui construit quelque chose ici n'a <em>nulle part où le montrer</em>. Pas de vitrine, pas de communauté, pas d'occasion de se faire repérer autrement qu'en partant.</p>
         <p class="lead rv" style="margin-top:1em">Solve met <em>le craft des devs à l'honneur</em> : ni un GitHub froid, ni un portfolio solitaire. <em>Même un projet en local mérite d'exister.</em></p>
-        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://ima-solve.vercel.app/" target="_blank" rel="noopener">Voir la plateforme</a></div>
       </div>
       <div class="shot rv"><img src="assets/img/solve.webp" alt="Solve, page d'accueil"></div>
     </div>
@@ -1119,7 +1177,17 @@ body.splash-on #splash{display:block}
     <div class="stackrow rv"><div class="lb">Mesure</div><div class="vv"><b>Umami</b> auto-hébergé</div></div>
     <div class="stackrow rv"><div class="lb">Mon rôle</div><div class="vv">Idée, design, développement · projet personnel</div></div>
 
-    <div class="punch rv"><p>Parti d'un clone de Kahoot. Devenu une plateforme de jeu avec économie, amis et défis quotidiens.</p></div>
+    <div class="sect rv">Ce que le jeu a produit</div>
+    <div class="split">
+      <div>
+        <p class="lead rv">À force de dessiner des boutons, des jauges, des cartes de joueur et des écrans de score, j'ai fini par en extraire une <em>bibliothèque de composants</em> : <strong>Homies UI</strong>.</p>
+        <p class="lead rv" style="margin-top:1em">Vingt composants néo-brutalistes pour jeux, quiz et applications festives. <em>Copier, coller, expédier.</em> Douze catégories, sept thèmes, <em>zéro dépendance</em>.</p>
+        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://homies-ui.vercel.app/" target="_blank" rel="noopener">Voir Homies UI</a></div>
+      </div>
+      <div class="shot rv"><img src="assets/img/homiesui.webp" alt="Homies UI, bibliothèque de composants"></div>
+    </div>
+
+    <div class="punch rv"><p>Parti d'un clone de Kahoot. Devenu une plateforme de jeu, puis une bibliothèque de composants que d'autres peuvent réutiliser.</p></div>
   </div>
 </section>
 
@@ -1133,8 +1201,9 @@ body.splash-on #splash{display:block}
     <div class="split">
       <div>
         <p class="lead rv">Dîme, quête, dons, services paroissiaux : dans la plupart des paroisses d'Afrique francophone, tout cela se gère encore <em>en espèces et sur un cahier</em>. Pas par choix : il n'y a ni budget logiciel, ni informaticien, ni carte bancaire.</p>
-        <p class="lead rv" style="margin-top:1em">Lumio permet de donner <em>par Mobile Money en quelques secondes</em>, et à la paroisse de suivre ses recettes et ses membres.</p>
-        <p class="cap rv">&lt; en développement · capture d'écran à venir /&gt;</p>
+        <p class="lead rv" style="margin-top:1em">Lumio numérise <em>dîmes, quêtes, demandes de messe et vie communautaire</em>, par Mobile Money. Sans cash perdu, sans secrétariat saturé.</p>
+        <p class="cap rv">&lt; 3 paroisses pilotes · Cotonou · MTN MoMo &amp; Moov /&gt;</p>
+        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://lumio-marketing-seven.vercel.app/" target="_blank" rel="noopener">Voir le site</a></div>
       </div>
       <div class="shot rv" style="padding:clamp(14px,2.4vh,30px)">
         <svg viewBox="0 0 420 210" style="width:100%;height:auto" aria-hidden="true">
@@ -1171,6 +1240,76 @@ body.splash-on #splash{display:block}
   </div>
 </section>
 
+<!-- CV VITAE -->
+<section class="page a-orange" id="p-cvvitae">
+  <div class="ph">
+    <div><div class="pk rv">Outil carrière · en ligne</div><h2 class="rv">CV <u>Vitae</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">Un CV mal formaté est écarté <em>avant d'être lu par un humain</em>. Les logiciels de recrutement, les ATS, filtrent sur la structure, les mots-clés, la lisibilité machine. Personne n'apprend ça ici.</p>
+        <p class="lead rv" style="margin-top:1em">CV Vitae analyse le CV, donne un <em>score en direct</em>, explique chaque point perdu et exporte un document aux standards internationaux. <em>En français, gratuit, sans inscription.</em></p>
+        <div class="rv" style="margin-top:1.2em"><a class="lnk" href="https://cv-vitae.vercel.app/" target="_blank" rel="noopener">Ouvrir CV Vitae</a></div>
+      </div>
+      <div class="shot rv"><img src="assets/img/cvvitae.webp" alt="CV Vitae, page d'accueil"></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-target"/></svg></span><h4><u>1</u> Le score avant le conseil</h4><p>L'utilisateur voit d'abord un chiffre sur 100, puis ce qui le fait monter. <strong>Un diagnostic chiffré fait agir</strong> là où une liste de bonnes pratiques se referme sans être lue.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-shield"/></svg></span><h4><u>2</u> L'IA n'invente jamais</h4><p>Elle reformule, structure, propose des verbes d'action. <strong>Elle n'ajoute aucune expérience, aucun diplôme, aucun chiffre.</strong></p><p>Pourquoi : un CV enjolivé par une machine se paie en entretien. L'outil doit rendre le candidat meilleur, pas menteur.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4><u>3</u> En français, pour ici</h4><p>Les outils équivalents sont anglophones et calés sur des conventions américaines. Celui-ci est pensé pour <strong>l'Afrique francophone</strong>, tout en restant lisible par un recruteur international.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-users"/></svg></span><h4><u>4</u> Sans inscription</h4><p>Ni compte, ni e-mail, ni carte. On dépose son CV, on l'améliore, on l'exporte.</p><p>Pourquoi : demander un compte à quelqu'un qui cherche du travail, c'est ajouter un obstacle au pire moment.</p></div>
+    </div>
+
+    <div class="punch rv"><p>Ce n'est pas un générateur de CV. C'est un correcteur qui explique pourquoi il corrige.</p></div>
+  </div>
+</section>
+
+<!-- GHOSTNET -->
+<section class="page a-green" id="p-ghostnet">
+  <div class="ph">
+    <div><div class="pk rv">Plateforme CTF · en développement</div><h2 class="rv">Ghost<u>Net</u></h2></div>
+    <div class="sep"></div><button class="xbtn rv" data-x>&#10005;</button>
+  </div>
+  <div class="bd">
+    <div class="split">
+      <div>
+        <p class="lead rv">On n'apprend pas la sécurité en écoutant. On l'apprend en <em>cherchant ce qui est caché</em>.</p>
+        <p class="lead rv" style="margin-top:1em">GhostNet est une plateforme de <em>capture the flag</em> habillée d'une fiction : un ministère de l'Observation, un dossier classé, une centaine d'anomalies dissimulées dans des archives. Chaque agent accrédité doit les identifier et les rapporter.</p>
+      </div>
+      <div class="shot rv"><img src="assets/img/ghostnet.webp" alt="GhostNet, page d'accueil"></div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi rv"><b>100</b><span>anomalies à débusquer</span></div>
+      <div class="kpi rv"><b>4</b><span>catégories : web, crypto, stégano, rétro-ingénierie</span></div>
+      <div class="kpi rv"><b>2087</b><span>l'année où se déroule la fiction</span></div>
+      <div class="kpi rv"><b>Master</b><span>nourri par mon Master cybersécurité en cours</span></div>
+    </div>
+
+    <div class="sect rv">Les quatre familles</div>
+    <div class="blocks c4">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-globe"/></svg></span><h4>Reconnaissance</h4><p>Commentaires, robots.txt, sitemap, cookies, en-têtes. Ce que tout site laisse traîner sans y penser.</p><p class="cap">40 anomalies</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-shield"/></svg></span><h4>Déchiffrement</h4><p>Base64, ROT, XOR, hachages faibles. Reconnaître un encodage d'un chiffrement.</p><p class="cap">15 anomalies</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>Stéganographie</h4><p>Bits de poids faible, métadonnées EXIF, morceaux de fichiers, spectrogrammes. Ce qu'une image cache.</p><p class="cap">15 anomalies</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-code"/></svg></span><h4>Rétro-ingénierie</h4><p>Binaires ELF, fichiers .pyc, JavaScript obfusqué. Lire ce qui n'était pas écrit pour être lu.</p><p class="cap">10 anomalies</p></div>
+    </div>
+
+    <div class="sect rv">Les décisions qui comptent</div>
+    <div class="blocks">
+      <div class="blk rv"><span class="ico"><svg><use href="#i-msg"/></svg></span><h4><u>1</u> Une fiction plutôt qu'une liste d'exercices</h4><p>« Observe. Rapporte. Obéis. » Le joueur est un agent, pas un élève. La consigne est diégétique, la progression aussi.</p><p>Pourquoi : la même épreuve présentée comme un exercice ennuie et présentée comme une enquête accroche. C'est du métier de pédagogue appliqué à la technique.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-teach"/></svg></span><h4><u>2</u> Une difficulté qui monte vraiment</h4><p>Quarante anomalies de reconnaissance pour dix de rétro-ingénierie. La base est large, la pointe est étroite.</p><p>Pourquoi : un CTF qui commence trop dur ne forme personne, il sélectionne ceux qui savaient déjà.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-check"/></svg></span><h4><u>3</u> Un quota visible</h4><p>Le compteur affiche en permanence ce qui reste à trouver. Rien n'est caché sur l'objectif, tout est caché sur le chemin.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-target"/></svg></span><h4><u>4</u> Pourquoi je le construis</h4><p>Je passe un Master en cybersécurité et j'accompagne des étudiants. <strong>Il me manquait un terrain d'entraînement en français, conçu pour débuter.</strong> Je le fabrique.</p></div>
+    </div>
+
+    <div class="punch rv"><p>La sécurité ne s'enseigne pas de face. Elle s'apprend en cherchant ce que quelqu'un a voulu cacher.</p></div>
+  </div>
+</section>
+
 <!-- EPITECH -->
 <section class="page a-blue" id="p-epitech">
   <div class="ph">
@@ -1194,8 +1333,15 @@ body.splash-on #splash{display:block}
       <div class="blk rv"><span class="ico"><svg><use href="#i-clock"/></svg></span><h4>epitech-tracker</h4><p>Agent de suivi d'activité tournant en <strong>service systemd</strong> sur les laptops Ubuntu fournis par Epitech Côte d'Ivoire, alimentant la plateforme destinée aux parents.</p></div>
       <div class="blk rv"><span class="ico"><svg><use href="#i-doc"/></svg></span><h4>Bulletins Insight</h4><p>Suite d'outils pédagogiques pour générer et gérer les commentaires de bulletins : la tâche la plus chronophage et la moins valorisée du métier.</p></div>
       <div class="blk rv"><span class="ico"><svg><use href="#i-code"/></svg></span><h4>Devkora</h4><p>La plateforme d'évaluation technique utilisée pour les étudiants et les candidats. Née comme un module de Zeno, devenue un produit autonome.</p></div>
-      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>FORGE &amp; les expériences JPO</h4><p>Des expériences immersives pour faire découvrir l'informatique aux lycéens et à leurs parents pendant les journées portes ouvertes : narration, mini-jeux, terminal, cinématique.</p></div>
+      <div class="blk rv"><span class="ico"><svg><use href="#i-palette"/></svg></span><h4>Opération Kernel &amp; les JPO</h4><p>Une expérience immersive pour faire découvrir l'informatique aux lycéens et à leurs parents : <strong>une IA a pris le contrôle, à eux de tout reprendre</strong>. Deux modes, seul face à NOVA ou en équipe sur ORACLE. Narration, mini-jeux, terminal, cinématique. <strong>Hors-ligne, 100 % navigateur.</strong></p><p><a class="lnk" href="https://sunny-swan-725103.netlify.app/" target="_blank" rel="noopener">Lancer l'expérience</a></p></div>
       <div class="blk rv"><span class="ico"><svg><use href="#i-msg"/></svg></span><h4>Ce que ça dit</h4><p>Je ne suis pas un pédagogue qui parle de technique, ni un développeur qui donne des cours. <strong>Je construis les outils de mon propre métier</strong>, et c'est le meilleur terrain d'essai qui existe.</p></div>
+    </div>
+
+    <div class="split">
+      <div>
+        <p class="lead rv">L'expérience des portes ouvertes, <em>Opération Kernel</em>, est celle dont je suis le plus content : elle ne raconte pas l'informatique, <em>elle la fait vivre</em> en quinze minutes, sans installation et sans connexion.</p>
+      </div>
+      <div class="shot rv"><img src="assets/img/nova.webp" alt="Opération Kernel, écran de choix du mode"></div>
     </div>
 
     <div class="punch rv"><p>Je suis passé d'étudiant à responsable en trois ans, dans la même école. Puis j'ai codé les outils dont cette école avait besoin.</p></div>
@@ -1332,7 +1478,7 @@ body.splash-on #splash{display:block}
 <script>
 (function(){
 'use strict';
-var ORDER = ['moi','faire','design','zeno','djai','devkora','entourage','solve','homies','lumio','epitech','clients','stack','parcours','contact'];
+var ORDER = ['moi','faire','design','zeno','djai','devkora','entourage','solve','cvvitae','ghostnet','homies','lumio','epitech','clients','stack','parcours','contact'];
 var veil = document.getElementById('veil');
 var pgbar = document.getElementById('pgbar');
 var pgnum = document.getElementById('pgnum');
